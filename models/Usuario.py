@@ -1,9 +1,9 @@
 import datetime
 
 class Usuario:
-    def __init__(self, id: int, nombres: str, apellidoP: str, apellidoM: str,
+    def __init__(self, idUsuario: int, nombres: str, apellidoP: str, apellidoM: str,
                  correoE: str, contrasena: str, fechaNacimiento: datetime):
-        self.id = id
+        self.idUsuario = idUsuario
         self.nombres = nombres
         self.apellidoP = apellidoP
         self.apellidoM = apellidoM
