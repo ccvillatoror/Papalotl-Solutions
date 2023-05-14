@@ -1,4 +1,4 @@
-from alchemyClasses.usuario import usuario
+from alchemyClasses.Usuario import usuario
 """
     class Usuario:
         def __init__(self,idUsuario, nombres, apellidoPaterno, apellidoMaterno, correoElectronico, fechaNacimiento, contrasenia, calle, numero, cp, colonia, ciudad, estado,tipoUsuario):
