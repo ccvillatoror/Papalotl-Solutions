@@ -1,14 +1,14 @@
 from alchemyClasses.__init__ import db
-import datetime
+
 
 class Usuario(db.Model):
-    id_usuario = db.Column('idUsuario', db.Integer) # Entero de autoincremento.
-    nombres = db.Column('nombres', db.String(20))
-    apellido_p = db.Column('apellidoPaterno', db.String(15))
+    id_usuario = db.Column('idUsuario', db.Integer, primary_key=True) # Entero de autoincremento.
+    nombres = db.Column('nombres', db.String(20), nullable=False)
+    apellido_p = db.Column('apellidoPaterno', db.String(15), nullable=False)
     apellido_m = db.Column('apellidoMaterno', db.String(15))
-    correo = db.Column('correo', db.String(30))
-    fecha_nac = db.Column('fechaNacimiento', db.DateTime)
-    contrasena = db.Column('contrasena', db.String(25))
+    correo = db.Column('correo', db.String(30), nullable=False)
+    fecha_nac = db.Column('fechaNacimiento', db.DateTime, nullable=False)
+    contrasena = db.Column('contrasena', db.String(25), nullable=False)
     dir_calle = db.Column('calle', db.Sring(20))
     dir_num = db.Column('numero',db.Integer)
     dir_cp = db.Column('cp', db.String(5))
