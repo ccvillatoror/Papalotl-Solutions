@@ -3,10 +3,11 @@ show databases;
 use micheladasatucasa;
 
 
-create table usuario(idUsuario int not null auto_increment primary key, nombres varchar (20), apellidoPaterno varchar (15),
-					apellidoMaterno varchar (15),correo varchar (30),fechaNacimiento date, contrasena varchar (25),
-                    calle varchar (20), numero int, cp varchar (5), colonia varchar (20), ciudad varchar (25),
-                    estado varchar (20),tipoUsuario varchar(15));
+create table usuario(idUsuario int not null auto_increment primary key, nombres varchar (20) not null,
+                    apellidoPaterno varchar (15) not null, apellidoMaterno varchar (15),
+                    correo varchar (30) not null, fechaNacimiento date not null,
+                    contrasena varchar (25) not null, calle varchar (20), numero int, cp varchar (5),
+                    colonia varchar (20), ciudad varchar (25), estado varchar (20), tipoUsuario varchar(15) not null);
                     
 create table producto (idProducto int not null auto_increment primary key,  nombre varchar (20),
                        descripcion varchar (25), precio decimal(6,2) NOT NULL DEFAULT '9999.99', 
