@@ -1,5 +1,5 @@
 from flask import Blueprint, flash, redirect, render_template, request, session, url_for
-from alchemyClasses.usuario import usuario
+from alchemyClasses.Usuario import usuario
 from models.model_usuario import usuario, obten_usuario
 
 loginBlueprint = Blueprint('login', __name__, url_prefix='/login')
