@@ -1,12 +1,42 @@
 from alchemyClasses.__init__ import db
+import datetime
 
-class usuario(db.Model):
+class Usuario(db.Model):
+    id_usuario = db.Column('idUsuario', db.Integer) # Entero de autoincremento.
+    nombres = db.Column('nombres', db.String(20))
+    apellido_p = db.Column('apellidoPaterno', db.String(15))
+    apellido_m = db.Column('apellidoMaterno', db.String(15))
+    correo = db.Column('correo', db.String(30))
+    fecha_nac = db.Column('fechaNacimiento', db.DateTime)
+    contrasena = db.Column('contrasena', db.String(25))
+    dir_calle = db.Column('calle', db.Sring(20))
+    dir_num = db.Column('numero',db.Integer)
+    dir_cp = db.Column('cp', db.String(5))
+    dir_colonia = db.Column('colonia', db.String(20))
+    dir_ciudad = db.Column('ciudad', db.String(25))
+    dir_estado = db.Column('estado', db.String(20))
+    tipo_usuario = db.Column('tipoUsuario', db.String(25))
 
-    id_usuario = db.Column('id_usuario', db.String(200), primary_key=True)
-    nombre = db.Column('nombre', db.String(200))
-    passwd = db.Column('passwd', db.String(40))
+    def __init__(self, nombres, apellido_p, correo, contrasena, fecha_nacimiento,
+                 apellido_m=None, calle=None, numero=None, cp=None, colonia=None,
+                 ciudad=None,estado=None):
+        self.nombres = nombres
+        self.apellido_p = apellido_p
+        self.apellido_m = apellido_m
+        self.correo = correo
+        self.contrasena = contrasena
+        self.fecha_nac= fecha_nacimiento
+        self.dir_calle = calle
+        self.dir_numero = numero
+        self.dir_cp = cp
+        self.dir_colonia = colonia
+        self.dir_ciudad = ciudad
+        self.dir_estado = estado
 
-    def __init__(self, email, nombre=None, passwd=None):
-        self.id_usuario = email
-        self.nombre = nombre
-        self.passwd = passwd
+    def informacion_envio(self, calle, numero, cp, colonia, ciudad,estado):
+        self.dir_calle = calle
+        self.dir_numero = numero
+        self.dir_cp = cp
+        self.dir_colonia = colonia
+        self.dir_ciudad = ciudad
+        self.dir_estado = estado
