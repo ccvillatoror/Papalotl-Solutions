@@ -1,6 +1,6 @@
 from Producto import Producto
 from Cliente import Cliente
-from InfoPago import InfoPago
+from models.InfoPago import InfoPago
 import datetime
 class Pedido:
     def __init__(self, idPedido, producto:Producto, cantidad, comprador:Cliente, total, estatus, infoPago:InfoPago):
