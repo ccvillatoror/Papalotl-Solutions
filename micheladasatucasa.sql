@@ -10,10 +10,10 @@ create table usuario(idUsuario int not null auto_increment primary key, nombres 
                     colonia varchar (20), ciudad varchar (25), estado varchar (20), tipoUsuario varchar(15) not null);
                     
 create table producto (idProducto int not null auto_increment primary key,  nombre varchar (20),
-                       descripcion varchar (25), precio decimal(6,2) NOT NULL DEFAULT '9999.99', 
+                       descripcion varchar (25), precio decimal(6,2) NOT NULL DEFAULT '9999.99',
                        cantidadInventario int not null);
                        
-create table pedido (idPedido int not null auto_increment primary key, cantidad int not null, 
+create table pedido (idPedido int not null auto_increment primary key,
                      total decimal(6,2) NOT NULL DEFAULT '9999.99', estatus boolean, fecha date);
                      
 create table insumo (idInsumo int not null auto_increment primary key,nombre varchar (25),cantidad int not null, fecha date);
@@ -34,7 +34,7 @@ create table consume (id_producto int not null, id_insumo int not null, foreign 
                       foreign key (id_insumo) references insumo (idInsumo));
                       
 create table conforma (id_pedido int not null, id_producto int not null, foreign key (id_pedido) references pedido (idPedido),
-                       foreign key (id_producto) references producto(idProducto));
+                       foreign key (id_producto) references producto(idProducto), cantidad int not null,);
                        
 show tables;
 
