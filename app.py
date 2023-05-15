@@ -75,7 +75,7 @@ def registro_produto():
             error = 'Se requiere precio'
         db.session.add(producto)
         db.session.commit()
-    return render_template("index.html")
+    return render_template("productos.html")
 
 
 # ---------------------------
@@ -86,12 +86,27 @@ def mostrar_productos():
 
 
 # ---------------------------
-@app.route('/eliminar/<int:producto_id>', methods=['GET'])
+@app.route('/producto/<int:idProducto>')
+def mostrar_producto(idProducto):
+    query = text('SELECT * FROM producto WHERE idProducto = :idProducto')
+    producto = db.session.execute(query, {'idProducto':idProducto})
+    if producto is None:
+        return render_template('errorProducto.html')
+    return render_template('producto.html', producto=producto)
+
+
+# ---------------------------
+@app.route('/eliminarProducto/<int:producto_id>', methods=['GET'])
 def eliminar_producto(producto_id):
     producto = Producto.query.get(producto_id)
     db.session.delete(producto)
     db.session.commit()
     return 'Producto eliminado correctamente'
+
+
+@app.route('/eliminarP/')
+def mostrar_productos_eliminar():
+    return render_template('eliminar_productos.html')
 
 
 if __name__ == '__main__':
