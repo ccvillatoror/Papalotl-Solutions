@@ -4,7 +4,7 @@ import datetime
 class Pedido(db.Model):
 
     id_pedido = db.Column('idPedido', db.Integer, primary_key=True) # Entero de autoincremento.
-    total = db.Column('total', db.Numerable(6,2), nullable=False)
+    total = db.Column('total', db.Float, nullable=False)
     estatus = db.Column('estatus', db.Boolean)
     fecha = db.Column('fecha', db.DateTime)
 
