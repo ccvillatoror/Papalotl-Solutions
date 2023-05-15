@@ -1,0 +1,16 @@
+...
+<tbody>
+    {% for producto in productos %}
+    <tr>
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.descripcion }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>
+            <a href="/editar/{{ producto.id }}">Editar</a>
+            <a href="/eliminar/{{ producto.id }}">Eliminar</a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+...

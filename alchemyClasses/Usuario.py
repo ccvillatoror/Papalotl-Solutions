@@ -9,7 +9,7 @@ class Usuario(db.Model):
     correo = db.Column('correo', db.String(30), nullable=False)
     fecha_nac = db.Column('fechaNacimiento', db.DateTime, nullable=False)
     contrasena = db.Column('contrasena', db.String(25), nullable=False)
-    dir_calle = db.Column('calle', db.Sring(20))
+    dir_calle = db.Column('calle', db.String(20))
     dir_num = db.Column('numero',db.Integer)
     dir_cp = db.Column('cp', db.String(5))
     dir_colonia = db.Column('colonia', db.String(20))
