@@ -1,9 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
 from alchemyClasses.Producto import Producto
-from controllers.gestionar_producto import registra_producto, actualizar_producto
 
 DATABASE_NAME = "micheladasatucasa"
 DATABASE_USERNAME = "natalia"
@@ -11,7 +10,6 @@ DATABASE_PASSWORD = "ati_desa15"
 DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
-db = SQLAlchemy()
 # app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://natalia:ati_desa15@localhost:3306/prueba"
 
 app.config[
@@ -19,6 +17,8 @@ app.config[
 app.config.from_mapping(
     SECRET_KEY='dev'
 )
+
+db = SQLAlchemy()
 db.init_app(app)
 
 with app.app_context():
@@ -44,7 +44,12 @@ def mostrar_formulario_editar_producto(producto_id):
 
 @app.route('/editarProducto/<int:producto_id>', methods=['POST'])
 def modificar_producto(producto_id):
-    actualizar_producto(producto_id)
+    producto = Producto.query.get(producto_id)
+
+    producto.nombre = request.form['nombre']
+    producto.descripcion = request.form['descripcion']
+    producto.precio = request.form['precio']
+    db.session.commit()
     return 'Producto actualizado correctamente'
 
 
@@ -56,14 +61,27 @@ def mostrar_registro_producto():
 
 @app.route('/reProducto', methods=['GET', 'POST'])
 def registro_produto():
-    registra_producto()
+    if request.method == 'GET':
+        nombre = request.args.get('nombre')
+        des = request.args.get('descripcion')
+        precio = request.args.get('precio')
+        cant = request.args.get('cant_inventario')
+        error = None
+
+        producto = Producto(cant, nombre, des, precio)
+        if not nombre:
+            error = 'Se requiere nombre'
+        elif not precio:
+            error = 'Se requiere precio'
+        db.session.add(producto)
+        db.session.commit()
     return render_template("index.html")
 
 
 # ---------------------------
 @app.route('/productos')
 def mostrar_productos():
-    productos = Producto.query.all()
+    productos = db.session.execute(text('SELECT * FROM producto'))
     return render_template('productos.html', productos=productos)
 
 
