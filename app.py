@@ -1,6 +1,7 @@
 from flask import Flask,render_template
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
+#from controllers.ControladorUsuario import registra_cliente_blueprint
 
 DATABASE_NAME = "micheladasatucasa"
 DATABASE_USERNAME = "natalia" 
@@ -9,6 +10,7 @@ DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
 db = SQLAlchemy()
+#app.register_blueprint(registra_cliente_blueprint)
 #app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://natalia:ati_desa15@localhost:3306/prueba"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+DATABASE_USERNAME+':'+DATABASE_PASSWORD+'@'+DATABASE_HOST+'/'+DATABASE_NAME
@@ -27,7 +29,7 @@ with app.app_context():
 
 @app.route('/')
 def hello():
-    return render_template("index.html")
+    return render_template("registro_cliente.html")
 
 if __name__ == '__main__':
      app.run(port=5000, debug=True)

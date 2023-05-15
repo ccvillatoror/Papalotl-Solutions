@@ -11,7 +11,7 @@ registra_cliente_blueprint = Blueprint('registro_cliente', __name__, url_prefix=
 
 @registra_cliente_blueprint.route('/', methods=['GET', 'POST'])
 def registra_cliente():
-    if request.method == 'POST':
+    if request.method == 'GET':
         nombre = request.form['nombre']
         apellido_p = request.form['apellido_p']
         apellido_m = request.form['apellido_m']
