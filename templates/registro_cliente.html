@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Client Registration</title>
+  <title>Registro de Cliente</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -69,8 +69,8 @@
 </head>
 <body>
   <div class="container">
-    <h2>Client Registration</h2>
-    <form>
+    <h2>Registro de Cliente</h2>
+    <form action="#" method="post">
       <div class="form-group">
         <label for="nombre">Nombre/s:</label>
         <input type="text" id="nombre" name="nombre" required value="{{
@@ -85,7 +85,7 @@
       </div>
       <div class="form-group">
         <label for="apellido_m">Apellido Materno:</label>
-        <input type="text" id="apellido_m" name="apellido_m" required value="{{
+        <input type="text" id="apellido_m" name="apellido_m" value="{{
                 request.form.apellido_m
                 }}">
       </div>
@@ -112,7 +112,7 @@
         <input type="password" id="password-confirm" name="password-confirm" required>
       </div>
       <div class="form-group">
-        <button type="submit">Register</button>
+        <button type="submit">Registrarme</button>
       </div>
     </form>
   </div>

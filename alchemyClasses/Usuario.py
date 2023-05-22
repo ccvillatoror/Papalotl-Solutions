@@ -7,7 +7,7 @@ class Usuario(db.Model):
     apellido_p = db.Column('apellidoPaterno', db.String(15), nullable=False)
     apellido_m = db.Column('apellidoMaterno', db.String(15))
     correo = db.Column('correo', db.String(30), nullable=False)
-    fecha_nac = db.Column('fechaNacimiento', db.DateTime, nullable=False)
+    fecha_nac = db.Column('fechaNacimiento', db.String(25), nullable=False)
     contrasena = db.Column('contrasena', db.String(25), nullable=False)
     dir_calle = db.Column('calle', db.String(20))
     dir_num = db.Column('numero',db.Integer)

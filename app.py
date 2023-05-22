@@ -35,11 +35,21 @@ if __name__ == '__main__':
      app.run(port=5000, debug=True)"""
 import json
 
-from flask import Flask, render_template, url_for, redirect, request
+from flask import Flask, render_template, url_for, redirect, request, Blueprint, jsonify
+from controllers.ControladorUsuario import registro_cliente_blueprint
+from controllers.login import loginBlueprint
 
-from alchemyClasses.Pedido import Pedido
+
 
 app = Flask(__name__)
+app.register_blueprint(registro_cliente_blueprint)
+app.register_blueprint(loginBlueprint)
+
+'''
+Configuración base de datos temporal
+'''
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuario.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 @app.route("/")
 def home():
@@ -48,25 +58,20 @@ def home():
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "POST":
-        nombre = request.form["nombre"]
-        total = request.form["total"]
-        estatus = request.form["estatus"]
-        """pedido = {
-            "nombre":    request.form["nombre"],
-            "total": request.form["total"],
-            "estatus": request.form["estatus"],
-        }"""
-        #print("pedido recien hecho:", pedido)
-        #fecha = request.form["fecha"]
-        #pedido = Pedido(total,estatus)
-        #pedido.fecha = fecha
-        return redirect(url_for("user", usr=nombre))
+        return redirect(url_for("login.login"))
     else:
-        return render_template("prueba.html")
+        return render_template("login.html")
 
-#%201?ttl=100&stts=Estatus&fch=2023-05-14
+@app.route("/registro-cliente", methods=["GET","POST"])
+def registro_cliente():
+    if request.method == "POST":
+        return redirect(url_for("registro_cliente.registro_cliente"))
+    else:
+        return render_template("registro_cliente.html")
+
 @app.route("/<usr>")
 def user(usr):
+
 
     '''f usr is not None:
         if isinstance(usr,Pedido):
