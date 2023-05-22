@@ -1,4 +1,4 @@
-from alchemyClasses.insumo import insumo
+from alchemyClasses.insumo import insum
 from alchemyClasses._init_ import db
 
 
