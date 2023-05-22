@@ -38,6 +38,7 @@ import json
 from flask import Flask, render_template, url_for, redirect, request, Blueprint, jsonify
 from controllers.ControladorUsuario import registro_cliente_blueprint
 from controllers.login import loginBlueprint
+from alchemyClasses.__init__ import db
 
 
 
@@ -50,6 +51,12 @@ Configuración base de datos temporal
 '''
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuario.sqlite3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+def create_app():
+    db.init_app(app)
+    return app
+
+create_app()
 
 @app.route("/")
 def home():
