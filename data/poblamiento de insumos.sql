@@ -12,4 +12,4 @@ INSERT INTO `micheladasatucasa`.`insumo` (`idInsumo`, `nombre`, `cantidad`, `fec
 INSERT INTO `micheladasatucasa`.`insumo` (`idInsumo`, `nombre`, `cantidad`, `fecha`) VALUES ('12', 'topping 2', '4', '2023-05-7');
 INSERT INTO `micheladasatucasa`.`insumo` (`idInsumo`, `nombre`, `cantidad`, `fecha`) VALUES ('13', 'topping 3', '2', '2023-05-3');
 INSERT INTO `micheladasatucasa`.`insumo` (`idInsumo`, `nombre`, `cantidad`, `fecha`) VALUES ('14', 'topping 4', '6', '2023-03-10');
-INSERT INTO `micheladasatucasa`.`insumo` (`idInsumo`, `nombre`, `cantidad`, `fecha`) VALUES ('15', 'Botana Surtida', '4', '2023-05-1');
+INSERT INTO `micheladasatucasa`.`insumo` (`idInsumo`, `nombre`, `cantidad`, `fecha`) VALUES ('15', 'Botana Surtida', '4', '2023-05-1')
