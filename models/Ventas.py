@@ -1,4 +1,4 @@
-class Ventas
+class Ventas:
   def _init_(self,precio, cantidad , venta):
     self.precio = precio
     self.cantidad = cantidad
