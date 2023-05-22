@@ -4,7 +4,7 @@ class Producto(db.Model):
 
     id_producto = db.Column('idProducto', db.Integer, primary_key=True) # Entero de autoincremento.
     nombre = db.Column('nombre', db.String(20))
-    descripcion = db.Column('descripcion', db.String(25))
+    descripcion = db.Column('descripcion', db.String(250))
     precio = db.Column('precio', db.Numeric(6,2), nullable=False)
     cant_inventario = db.Column('cantidadInventario', db.Integer, nullable=False)
 
