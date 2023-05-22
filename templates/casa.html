@@ -1,10 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Casa</title>
+  <title>Drink Store</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      margin: 0;
+    }
+    .product {
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .product img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .product h2 {
+      margin-top: 0;
+    }
+    .product p {
+      margin-bottom: 10px;
+    }
+    .product .price {
+      font-weight: bold;
+    }
+    .footer {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+  </style>
 </head>
 <body>
-    <h1>CASA</h1>
+  <div class="header">
+    <h1>Micheladas a tu casa</h1>
+  </div>
+  <div class="container">
+    <div class="product">
+      <img src="product1.jpg" alt="Product 1">
+      <h2>Product 1</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac bibendum urna. Sed iaculis lectus eu metus sagittis finibus.</p>
+      <p class="price">$9.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <div class="product">
+      <img src="product2.jpg" alt="Product 2">
+      <h2>Product 2</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ac bibendum urna. Sed iaculis lectus eu metus sagittis finibus.</p>
+      <p class="price">$14.99</p>
+      <button>Add to Cart</button>
+    </div>
+    <!-- Add more product elements as needed -->
+  </div>
+  <div class="footer">
+    &copy; 2023 Drink Store. All rights reserved.
+  </div>
 </body>
 </html>
