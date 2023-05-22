@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Client Registration</title>
+  <title>Registro de Cliente</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -51,37 +51,68 @@
       cursor: pointer;
     }
   </style>
+  <script>
+    function registerFormSubmit(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Retrieve password and password confirmation values
+      var password = document.getElementById("contrasena").value;
+      var passwordConfirm = document.getElementById("password-confirm").value;
+
+      // Check if the passwords match
+      if (password !== passwordConfirm) {
+        alert("Passwords do not match. Please try again.");
+        return;
+      }
+    }
+  </script>
 </head>
 <body>
   <div class="container">
-    <h2>Client Registration</h2>
-    <form>
+    <h2>Registro de Cliente</h2>
+    <form action="#" method="post">
       <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <label for="nombre">Nombre/s:</label>
+        <input type="text" id="nombre" name="nombre" required value="{{
+                request.form.nombre
+                }}">
       </div>
       <div class="form-group">
-        <label for="last-name1">Last Name 1:</label>
-        <input type="text" id="last-name1" name="last-name1" required>
+        <label for="apellido_p">Apellido Paterno:</label>
+        <input type="text" id="apellido_p" name="apellido_p" required value="{{
+                request.form.apellido_p
+                }}">
       </div>
       <div class="form-group">
-        <label for="last-name2">Last Name 2:</label>
-        <input type="text" id="last-name2" name="last-name2" required>
+        <label for="apellido_m">Apellido Materno:</label>
+        <input type="text" id="apellido_m" name="apellido_m" value="{{
+                request.form.apellido_m
+                }}">
       </div>
       <div class="form-group">
-        <label for="dob">Date of Birth:</label>
-        <input type="date" id="dob" name="dob" required>
+        <label for="fecha_nac">Fecha de Nacimiento:</label>
+        <input type="date" id="fecha_nac" name="fecha_nac" required value="{{
+                request.form.fecha_nac
+                }}">
       </div>
       <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
+        <label for="correo">Email:</label>
+        <input type="email" id="correo" name="correo" required value="{{
+                request.form.correo
+                }}">
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required value="{{
+                request.form.correo
+                }}">
       </div>
       <div class="form-group">
-        <button type="submit">Register</button>
+        <label for="password-confirm">Confirma tu Contraseña:</label>
+        <input type="password" id="password-confirm" name="password-confirm" required>
+      </div>
+      <div class="form-group">
+        <button type="submit">Registrarme</button>
       </div>
     </form>
   </div>

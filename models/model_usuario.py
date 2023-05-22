@@ -8,12 +8,14 @@ from alchemyClasses.__init__ import db
 '''
 
 
-def obten_usuario(email_arg):
+def obtener_usuario(email_arg):
     ans = Usuario.query.filter(Usuario.correo == email_arg).first()
     return ans
 
-def registra_usuario(nuevo_usuario):
+def registrar_usuario(nuevo_usuario):
     db.session.add(nuevo_usuario)
     db.session.commit()
     ans = Usuario.query.filter(Usuario.correo == nuevo_usuario.correo).first()
     return ans
+
+
