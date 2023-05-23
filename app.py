@@ -1,44 +1,10 @@
-"""from flask import Flask, render_template, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
-from controllers.ControladorUsuario import registra_cliente_blueprint
-
-DATABASE_NAME = "micheladasatucasa"
-DATABASE_USERNAME = "root"
-DATABASE_PASSWORD = "root"
-DATABASE_HOST = "localhost:3306"
-
-app = Flask(__name__)
-db = SQLAlchemy()
-app.register_blueprint(registra_cliente_blueprint)
-#app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://natalia:ati_desa15@localhost:3306/prueba"
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+DATABASE_USERNAME+':'+DATABASE_PASSWORD+'@'+DATABASE_HOST+'/'+DATABASE_NAME
-app.config.from_mapping(
-    SECRET_KEY='dev'
-)
-db.init_app(app)
-
-with app.app_context():
-    try:
-        # db.session.execute('SELECT 1')
-        db.session.execute(text('SELECT 1'))
-        print('\n\n----------- Connection successful !')
-    except Exception as e:
-        print('\n\n----------- Connection failed ! ERROR : ', e)
-
-@app.route('/')
-def hello():
-    return redirect(url_for('registro_cliente.registra_cliente'))
-
-if __name__ == '__main__':
-     app.run(port=5000, debug=True)"""
 import json
 
 from flask import Flask, render_template, url_for, redirect, request, Blueprint, jsonify
 from controllers.ControladorUsuario import registro_cliente_blueprint
 from controllers.login import loginBlueprint
 from alchemyClasses.__init__ import db
+from sqlalchemy import text
 
 DATABASE_NAME = "micheladasatucasa"
 DATABASE_USERNAME = "root"
@@ -49,27 +15,17 @@ app = Flask(__name__)
 app.register_blueprint(registro_cliente_blueprint)
 app.register_blueprint(loginBlueprint)
 
-'''
-Configuración base de datos temporal
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///usuario.sqlite3'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-'''
-
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+DATABASE_USERNAME+':'+DATABASE_PASSWORD+'@'+DATABASE_HOST+'/'+DATABASE_NAME
 app.config.from_mapping(
     SECRET_KEY='dev'
 )
 
-
-def create_app():
-    db.init_app(app)
-    return app
-
-create_app()
+db.init_app(app)
 
 @app.route("/")
 def home():
-    return render_template("pedidos.html")
+    pedidos = db.session.execute(text('SELECT * FROM pedido WHERE estatus'))
+    return render_template("pedidos.html", pedidos=pedidos)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
