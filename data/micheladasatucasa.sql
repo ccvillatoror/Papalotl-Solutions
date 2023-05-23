@@ -1,11 +1,11 @@
 
 create table usuario(idUsuario int not null auto_increment primary key, nombres varchar (20), apellidoPaterno varchar (15),
-					apellidoMaterno varchar (15),correo varchar (30),fechaNacimiento date, contraseña varchar (25),
+					apellidoMaterno varchar (15),correo varchar (30),fechaNacimiento date, contrasena varchar (25),
                     calle varchar (20), numero int not null, cp int not null, colonia varchar (20), ciudad varchar (25),
                     estado varchar (20),tipoUsuario varchar(15));
                     
-create table producto (idProducto int not null auto_increment primary key,  nombre varchar (20),
-                       descripcion varchar (250), precio decimal(6,2) NOT NULL DEFAULT '9999.99', 
+create table producto (idProducto int not null auto_increment primary key,  nombre varchar not null (20),
+                       descripcion varchar not null (250), precio decimal(6,2) NOT NULL DEFAULT '9999.99',
                        cantidadInventario int not null);
                        
 create table pedido (idPedido int not null auto_increment primary key, cantidad int not null, 

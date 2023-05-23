@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Micheladas a tu casa</title>
+  <title>Pedidos</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -75,19 +75,15 @@
   <div class="container">
     <div class="header">
       <h1>Micheladas a tu casa</h1>
-      <div align="right" class="header-buttons">
-        <button onclick="window.location.href='/login'">Ingresar</button>
-        <button onclick="window.location.href='/registro-cliente'">Registrarme</button>
-      </div>
+        <h2>Pedidos</h2>
     </div>
   <div class="container">
-    {% for producto in productos %}
+    {% for pedido in pedidos %}
     <div class="product">
-      <img src="product1.jpg" alt="Pedido 1">
-      <h2>{{ producto.nombre }}</h2>
-      <p>{{ producto.descripcion }}</p>
-      <p class="price">${{ producto.precio }}</p>
-      <button>Comprar</button>
+      <h2>Pedido {{ pedido.idPedido }}</h2>
+      <p class="cantidad">5</p>
+      <p class="total">${{ pedido.total }}</p>
+      <button onclick="window.location.href='/producto'">Atender</button>
     </div>
     {% endfor %}
     <!-- Add more product elements as needed -->

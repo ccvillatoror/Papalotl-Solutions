@@ -1,82 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Michelada Classic - Micheladas a tu casa</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #ffffff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h1 {
-      text-align: center;
-    }
-    .product-image {
-      text-align: center;
-    }
-    .product-description {
-      margin-top: 20px;
-    }
-    .buy-button {
-      text-align: center;
-      margin-top: 20px;
-    }
-    .quantity-label {
-      display: inline-block;
-      margin-right: 10px;
-    }
-    .quantity-select {
-      width: 80px;
-    }
-    .total-label {
-      font-weight: bold;
-      margin-top: 10px;
-    }
-  </style>
-  <script>
-    function updateTotal() {
-      var quantity = parseInt(document.getElementById("quantity").value);
-      var price = 4.99; // Change this value to the actual price per unit
-
-      var total = quantity * price;
-      document.getElementById("total").textContent = "$" + total.toFixed(2);
-    }
-  </script>
+    <title>Detalles del producto</title>
 </head>
 <body>
-  <div class="container">
-    <h1>Michelada Classic</h1>
-    <div class="product-image">
-      <img src="michelada-classic.jpg" alt="Michelada Classic">
-    </div>
-    <div class="product-description">
-      <p>Enjoy the classic taste of our signature Michelada. Made with premium ingredients, this refreshing drink is perfect for any occasion.</p>
-      <p>Price: $4.99</p>
-    </div>
-    <div class="buy-button">
-      <label for="quantity" class="quantity-label">Quantity:</label>
-      <select id="quantity" name="quantity" class="quantity-select" onchange="updateTotal()">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <!-- Add more options as needed -->
-      </select>
-      <button onclick="window.location.href='order.html'">Comprar</button>
-    </div>
-    <div class="total-label">
-      Total: <span id="total">$4.99</span>
-    </div>
-  </div>
+    <h1>Detalles del producto</h1>
+    <p><strong>ID:</strong> {{ producto.idProducto }}</p>
+    <p><strong>Nombre:</strong> {{ producto.nombre}}</p>
+    <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+    <p><strong>Precio:</strong> {{ producto.precio }}</p>
+    <p><strong>Cantidad en Inventario:</strong> {{ producto.cantidadInventario }}</p>
 </body>
 </html>
-
