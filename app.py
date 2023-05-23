@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 
@@ -75,7 +75,7 @@ def registro_produto():
             error = 'Se requiere precio'
         db.session.add(producto)
         db.session.commit()
-    return render_template("productos.html")
+    return redirect('/productos')
 
 
 # ---------------------------
@@ -90,6 +90,7 @@ def mostrar_productos():
 def mostrar_producto(idProducto):
     query = text('SELECT * FROM producto WHERE idProducto = :idProducto')
     producto = db.session.execute(query, {'idProducto':idProducto})
+    producto = producto.fetchone()
     if producto is None:
         return render_template('errorProducto.html')
     return render_template('producto.html', producto=producto)
