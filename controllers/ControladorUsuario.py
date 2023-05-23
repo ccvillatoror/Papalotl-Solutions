@@ -24,11 +24,11 @@ def registro_cliente():
         usuario = Usuario(nombre, apellido_p, email, contrasena, fecha_nacimiento, 'Cliente', apellido_m=apellido_m)
 
         if obtener_usuario(email):
-            flash("Error: El correo ya está registado en un usuario.")
+            #flash("Error: El correo ya está registado en un usuario.")
             return redirect(url_for("registro_cliente"))
         else:
             registrar_usuario(usuario)
-            flash("Usuario registrado con éxito.")
+            #flash("Usuario registrado con éxito.")
             return redirect(url_for("home"))
     else:
         return render_template("registro_cliente.html")

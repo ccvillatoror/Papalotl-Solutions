@@ -9,8 +9,8 @@ from controllers.ControladorUsuario import registro_cliente_blueprint
 
 
 DATABASE_NAME = "micheladasatucasa"
-DATABASE_USERNAME = "natalia" 
-DATABASE_PASSWORD = "ati_desa15"
+DATABASE_USERNAME = "root"
+DATABASE_PASSWORD = "root"
 DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
@@ -116,7 +116,8 @@ def mostrar_productos_eliminar():
 
 @app.route("/")
 def home():
-    return render_template("casa.html")
+    productos = Producto.query.filter().all()
+    return render_template("casa.html", productos=productos)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
