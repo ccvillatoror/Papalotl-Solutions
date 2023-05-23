@@ -1,6 +1,6 @@
 
 create table usuario(idUsuario int not null auto_increment primary key, nombres varchar (20), apellidoPaterno varchar (15),
-					apellidoMaterno varchar (15),correo varchar (30),fechaNacimiento date, contraseña varchar (25),
+					apellidoMaterno varchar (15),correo varchar (30),fechaNacimiento date, contrasena varchar (25),
                     calle varchar (20), numero int not null, cp int not null, colonia varchar (20), ciudad varchar (25),
                     estado varchar (20),tipoUsuario varchar(15));
                     
