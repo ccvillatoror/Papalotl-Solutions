@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dirección de Envío</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="text"],
+    .form-group input[type="text"],
+    .form-group input[type="text"],
+    .form-group select{
+      width: 92%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-group button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Ingresa la dirección de envío</h2>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="calle">Calle:</label>
+        <input type="text" id="calle" name="calle" required value="{{
+                request.form.calle
+                }}">
+      </div>
+      <div class="form-group">
+        <label for="num">Número:</label>
+        <input type="text" id="num" name="num" required value="{{
+                request.form.num
+                }}">
+      </div>
+      <div class="form-group">
+        <label for="cp">Código Postal:</label>
+        <input type="text" id="cp" name="cp" value="{{
+                request.form.cp
+                }}">
+      </div>
+      <div class="form-group">
+        <label for="colonia">Colonia:</label>
+        <input type="text" id="colonia" name="colonia" required value="{{
+                request.form.colonia
+                }}">
+      </div>
+      <div class="form-group">
+        <label for="ciudad">Ciudad:</label>
+        <input type="text" id="text" name="text" required value="{{
+                request.form.ciudad
+                }}">
+      </div>
+      <div class="form-group">
+        <label for="estado" class="form-group">Estado:</label>
+        <select id="estado" name="estado" class="form-group">
+
+        <option value="Aguascalientes">Aguascalientes</option>
+        <option value="Baja California">Baja California</option>
+        <option value="Baja California Sur">Baja California Sur</option>
+        <option value="Campeche">Campeche</option>
+        <option value="Chiapas">Chiapas</option>
+        <option value="Chihuahua">Chihuahua</option>
+        <option value="Coahuila de Zaragoza">Coahuila de Zaragoza</option>
+        <option value="Colima">Colima</option>
+        <option value="Durango">Durango</option>
+        <option value="Estado de México">Estado de México</option>
+        <option value="Guanajuato">Guanajuato</option>
+        <option value="Guerrero">Guerrero</option>
+        <option value="Hidalgo">Hidalgo</option>
+        <option value="Jalisco">Jalisco</option>
+        <option value="Michoacán de Ocampo">Michoacán de Ocampo</option>
+        <option value="Morelos">Morelos</option>
+        <option value="Nayarit">Nayarit</option>
+        <option value="Nuevo León">Nuevo León</option>
+        <option value="Oaxaca">Oaxaca</option>
+        <option value="Querétaro">Querétaro</option>
+        <option value="Quintana Roo">Quintana Roo</option>
+        <option value="San Luis Potosí">San Luis Potosí</option>
+        <option value="Sinaloa">Sinaloa</option>
+        <option value="Sonora">Sonora</option>
+        <option value="Tabasco">Tabasco</option>
+        <option value="Tamaulipas">Tamaulipas</option>
+        <option value="Tlaxcala">Tlaxcala</option>
+        <option value="Veracruz de Ignacio de la Llave">Veracruz de Ignacio de la Llave</option>
+        <option value="Yucatán">Yucatán</option>
+        <option value="Zacatecas">Zacatecas</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="submit">Continuar a Pago</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
