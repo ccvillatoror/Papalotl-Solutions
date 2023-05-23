@@ -1,8 +1,13 @@
-from flask import Flask, redirect, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
+from controllers.ControladorUsuario import registro_cliente_blueprint
+import json
 
+from flask import Flask, render_template, url_for, redirect, request, Blueprint, jsonify
+from controllers.login import loginBlueprint
+from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
+
 
 DATABASE_NAME = "micheladasatucasa"
 DATABASE_USERNAME = "natalia"
@@ -10,7 +15,9 @@ DATABASE_PASSWORD = "ati_desa15"
 DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
-# app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://natalia:ati_desa15@localhost:3306/prueba"
+app.register_blueprint(registro_cliente_blueprint)
+app.register_blueprint(loginBlueprint)
+#app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://natalia:ati_desa15@localhost:3306/prueba"
 
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + DATABASE_USERNAME + ':' + DATABASE_PASSWORD + '@' + DATABASE_HOST + '/' + DATABASE_NAME
@@ -28,11 +35,6 @@ with app.app_context():
         print('\n\n----------- Connection successful ! -----------')
     except Exception as e:
         print('\n\n----------- Connection failed ! ERROR : ', e)
-
-
-@app.route('/')
-def hello():
-    return render_template("index.html")
 
 
 # ---------------------------
@@ -109,6 +111,45 @@ def eliminar_producto(producto_id):
 def mostrar_productos_eliminar():
     return render_template('eliminar_productos.html')
 
+@app.route("/")
+def home():
+    return render_template("casa.html")
+
+@app.route("/login", methods=["GET","POST"])
+def login():
+    if request.method == "POST":
+        return redirect(url_for("login.login"))
+    else:
+        return render_template("login.html")
+
+@app.route("/registro-cliente", methods=["GET","POST"])
+def registro_cliente():
+    if request.method == "POST":
+        return redirect(url_for("registro_cliente.registro_cliente"))
+    else:
+        return render_template("registro_cliente.html")
+
+@app.route("/<usr>")
+def user(usr):
+
+
+    '''f usr is not None:
+        if isinstance(usr,Pedido):
+            return f"<h1>{usr.total}</h1>"
+        else:
+            tipo = type(usr)
+            print(tipo)
+            print(usr)
+            return f"<h1>No es instancia de Pedido, es {tipo}</h1>"
+    else:
+        return f"<h1>Es Nulo    </h1>"'''
+
+    return f"<h1>{usr}</h1>"
+
+def create_app():
+    db.init_app(app)
+    return app
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
+    

@@ -7,7 +7,7 @@ class Usuario(db.Model):
     apellido_p = db.Column('apellidoPaterno', db.String(15), nullable=False)
     apellido_m = db.Column('apellidoMaterno', db.String(15))
     correo = db.Column('correo', db.String(30), nullable=False)
-    fecha_nac = db.Column('fechaNacimiento', db.DateTime, nullable=False)
+    fecha_nac = db.Column('fechaNacimiento', db.String(25), nullable=False)
     contrasena = db.Column('contrasena', db.String(25), nullable=False)
     dir_calle = db.Column('calle', db.String(20))
     dir_num = db.Column('numero',db.Integer)
@@ -17,7 +17,7 @@ class Usuario(db.Model):
     dir_estado = db.Column('estado', db.String(20))
     tipo_usuario = db.Column('tipoUsuario', db.String(25))
 
-    def __init__(self, nombres, apellido_p, correo, contrasena, fecha_nacimiento,
+    def __init__(self, nombres, apellido_p, correo, contrasena, fecha_nacimiento, tipo_usuario,
                  apellido_m=None, calle=None, numero=None, cp=None, colonia=None,
                  ciudad=None,estado=None):
         self.nombres = nombres
@@ -32,6 +32,7 @@ class Usuario(db.Model):
         self.dir_colonia = colonia
         self.dir_ciudad = ciudad
         self.dir_estado = estado
+        self.tipo_usuario = tipo_usuario
 
     def informacion_envio(self, calle, numero, cp, colonia, ciudad,estado):
         self.dir_calle = calle
