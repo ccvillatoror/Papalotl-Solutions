@@ -76,6 +76,18 @@ def registro_cliente():
     else:
         return render_template("registro_cliente.html")
 
+@app.route("/producto", methods=["GET","POST"])
+def producto():
+    return render_template("producto.html")
+
+@app.route("/direccion-envio", methods=["GET", "POST"])
+def dirección():
+    return render_template("direccion_envío.html")
+
+@app.route("/pago", methods=["GET", "POST"])
+def pago():
+    return render_template("pago.html")
+
 @app.route("/<usr>")
 def user(usr):
 
