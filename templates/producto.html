@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Detalles del producto</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style-producto.css') }}">
 </head>
+
 <body>
-    <h1>Detalles del producto</h1>
-    <p><strong>ID:</strong> {{ producto.idProducto }}</p>
-    <p><strong>Nombre:</strong> {{ producto.nombre}}</p>
-    <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
-    <p><strong>Precio:</strong> {{ producto.precio }}</p>
-    <p><strong>Cantidad en Inventario:</strong> {{ producto.cantidadInventario }}</p>
+    <div class="header">
+        <h1>Detalles del producto</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="../registrarProducto">Agregar producto</a></li>
+                <li><a href="../productos">Consultar productos</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container ">
+        <div class="product-container">
+            <div class="product-card">
+                <h2 class="product-title"><strong>Nombre:</strong> {{ producto.nombre }}</h2>
+                <p class="product-price"><strong>Precio:</strong> {{ producto.precio }}</p>
+                <p class="product-description"><strong>Descripción:</strong>{{ producto.descripcion }}</p>
+                <p class="product-price"><strong>Cantidad en Inventario:</strong> {{ producto.cantidadInventario }}</p>
+                <a class="product-button" href="../editarProducto/{{ producto.idProducto }}">Editar</a>
+                <a class="product-button" href="../eliminarProducto/{{ producto.idProducto }}">Eliminar</a>
+            </div>
+        </div>
 </body>
+
 </html>

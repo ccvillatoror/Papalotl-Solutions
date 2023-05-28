@@ -2,9 +2,17 @@
 <html>
 <head>
     <title>Lista de productos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style-producto.css') }}">
 </head>
 <body>
-    <h1>Lista de productos</h1>
+    <div class="header">
+        <h1>Lista de productos</h1>
+        <nav class="navbar">
+            <ul>
+                <li><a href="./registrarProducto">Agregar producto</a></li>
+            </ul>
+        </nav>
+    </div>
     <table>
         <thead>
             <tr>
@@ -17,8 +25,8 @@
         </thead>
         <tbody>
             {% for producto in productos %}
-            <tr>
-                <td>{{ producto.id }}</td>
+            <tr  onclick="window.location.href='/producto/{{producto.idProducto}}'">
+                <td>{{ producto.idProducto }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precio }}</td>

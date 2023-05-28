@@ -9,8 +9,8 @@ from controllers.ControladorUsuario import registro_cliente_blueprint
 
 
 DATABASE_NAME = "micheladasatucasa"
-DATABASE_USERNAME = "root"
-DATABASE_PASSWORD = "root"
+DATABASE_USERNAME = "natalia"
+DATABASE_PASSWORD = "ati_desa15"
 DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
@@ -105,14 +105,9 @@ def mostrar_producto(idProducto):
 @app.route('/eliminarProducto/<int:producto_id>', methods=['GET'])
 def eliminar_producto(producto_id):
     producto = Producto.query.get(producto_id)
-    db.session.delete(producto)
-    db.session.commit()
+    #db.session.delete(producto)
+    #db.session.commit()
     return 'Producto eliminado correctamente'
-
-
-@app.route('/eliminarP/')
-def mostrar_productos_eliminar():
-    return render_template('eliminar_productos.html')
 
 @app.route("/")
 def home():
