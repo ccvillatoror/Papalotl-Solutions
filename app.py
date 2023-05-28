@@ -41,21 +41,30 @@ with app.app_context():
 
 
 # ---------------------------
-@app.route('/editarProducto/<int:producto_id>', methods=['GET'])
-def mostrar_formulario_editar_producto(producto_id):
-    producto = Producto.query.get(producto_id)
-    return render_template('formulario_editar.html', producto=producto)
 
+@app.route('/editarP/<int:idProducto>', methods=['GET'])
+def modificar_producto(idProducto):
+    producto = Producto.query.get(idProducto)
+    if request.method == 'GET':
+        nombre = request.args.get('nombre')
+        des = request.args.get('descripcion')
+        precio = request.args.get('precio')
+        cant = request.args.get('cant_inventario')
 
-@app.route('/editarProducto/<int:producto_id>', methods=['POST'])
-def modificar_producto(producto_id):
-    producto = Producto.query.get(producto_id)
+        producto.nombre = nombre
+        producto.descripcion = des
+        producto.precio = precio
+        producto.cant_inventario = cant
+        db.session.commit()
+        return redirect('/productos')
+       
 
-    producto.nombre = request.form['nombre']
-    producto.descripcion = request.form['descripcion']
-    producto.precio = request.form['precio']
-    db.session.commit()
-    return 'Producto actualizado correctamente'
+@app.route('/editarProducto/<int:idProducto>', methods=['GET'])
+def mostrar_modificar_producto(idProducto):
+    query = text('SELECT * FROM producto WHERE idProducto = :idProducto')
+    producto = db.session.execute(query, {'idProducto':idProducto})
+    producto = producto.fetchone()
+    return render_template('form_editar_producto.html', producto=producto)
 
 
 # ---------------------------
@@ -64,7 +73,7 @@ def mostrar_registro_producto():
     return render_template("form_registrar_producto.html")
 
 
-@app.route('/reProducto', methods=['GET', 'POST'])
+@app.route('/reProducto', methods=['GET'])
 def registro_produto():
     if request.method == 'GET':
         nombre = request.args.get('nombre')
@@ -102,12 +111,12 @@ def mostrar_producto(idProducto):
 
 
 # ---------------------------
-@app.route('/eliminarProducto/<int:producto_id>', methods=['GET'])
-def eliminar_producto(producto_id):
-    producto = Producto.query.get(producto_id)
+@app.route('/eliminarProducto/<int:idProducto>', methods=['GET'])
+def eliminar_producto(idProducto):
+    producto = Producto.query.get(idProducto)
     #db.session.delete(producto)
     #db.session.commit()
-    return 'Producto eliminado correctamente'
+    return redirect('/productos')
 
 @app.route("/")
 def home():
