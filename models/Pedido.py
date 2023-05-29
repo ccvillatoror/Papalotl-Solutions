@@ -1,8 +1,11 @@
-class Pedido:
-  def _init_(self,total, estatus , fecha):
-    self.total = total
-    self.estatus = estatus
-    self.fecha = fecha
-    
-  def reporte(self, registro_pedido):
-    self.venta = registro_pedido
+from alchemyClasses.pedido import pedido
+from alchemyClasses._init_ import db
+
+def pedido(estatus):
+  ans = pedido.query.filter (pedido.estatus == estatus).first
+  retunr ans 
+  
+
+def reporte_venta(estatus):
+  ans = pedido.query.filter(pedido.estatus == estatus).first
+  return 
