@@ -10,9 +10,12 @@
 <body>
     <div class="header">
         <h1>Detalles del producto</h1>
+        {% if session['usuario'] and session['tipo_usuario']%}
         <nav class="navbar">
             <ul>
-                <li><a href="../registrarProducto">Agregar producto</a></li>
+                {% if session['tipo_usuario'] == 'Administrador' %}
+                    <li><a href="../registrarProducto">Agregar producto</a></li>
+                {% endif %}
                 <li><a href="../productos">Consultar productos</a></li>
                 <li><a href="../logout">Cerrar sesion</a></li>
             </ul>
@@ -25,10 +28,22 @@
                 <p class="product-price"><strong>Precio:</strong> {{ producto.precio }}</p>
                 <p class="product-description"><strong>Descripción:</strong>{{ producto.descripcion }}</p>
                 <p class="product-price"><strong>Cantidad en Inventario:</strong> {{ producto.cant_inventario }}</p>
-                <a class="product-button" href="../editarProducto/{{ producto.idProducto }}">Editar</a>
-                <a class="product-button" href="../eliminarProducto/{{ producto.idProducto }}">Eliminar</a>
+                {% if session['tipo_usuario'] == 'Administrador' %}
+                    <a class="product-button" href="../editarProducto/{{ producto.idProducto }}">Editar</a>
+                    <a class="product-button" href="../eliminarProducto/{{ producto.idProducto }}">Eliminar</a>
+                {% endif %}
             </div>
         </div>
+        {% else %}
+            {% if session['usuario'] %}
+                <h1>Debe iniciar sesion como administrador para ver esta pagina</h1>
+                <button onclick="window.location.href='../logout'" class="button-login">Cerrar sesion</button>
+            {% else %}
+                <h1>Debe iniciar sesion para ver esta pagina</h1>
+                <button onclick="window.location.href='../login'" class="button-login">Iniciar sesion</button>
+            {% endif %}
+        {% endif %}
+    </div>
 </body>
 
 </html>

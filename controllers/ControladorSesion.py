@@ -12,6 +12,8 @@ def login_usuario():
         if usuario != None:
             if usuario.contrasena == contrasena:
                 session['usuario'] = usuario.correo
+                if usuario.tipo_usuario != "Cliente":
+                    session['tipo_usuario'] = usuario.tipo_usuario
                 return redirect(url_for("producto.productos"))
             else:
                 return "Error: Contraseña incorrecta."
@@ -23,5 +25,5 @@ def login_usuario():
 logout_usuario_blueprint = Blueprint('logout', __name__, url_prefix="/logout")
 @logout_usuario_blueprint.route('/')
 def logout_usuario():
-    session.pop('usuario', None)
+    session.clear()
     return redirect(url_for("home"))
