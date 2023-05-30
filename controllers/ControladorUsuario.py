@@ -37,13 +37,10 @@ def registro_cliente():
 login_usuario_blueprint = Blueprint('login', __name__, url_prefix="/login")
 @login_usuario_blueprint.route('/', methods=['GET', 'POST'])
 def login_usuario():
-    print("login")
     if request.method == 'POST':
-        print("post")
         correo = request.form['correo']
         contrasena = request.form['contrasena']
         usuario = obtener_usuario(correo)
-        print(usuario)
         
         if usuario != None:
             if usuario.contrasena == contrasena:

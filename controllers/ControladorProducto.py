@@ -18,7 +18,7 @@ def productos():
 def mostrar_producto(idProducto):
     producto = obtener_producto(idProducto)
     if producto is None:
-        return render_template('errorProducto.html')
+        return "No existe el producto"
     return render_template('producto.html', producto=producto)
 
 @productos_blueprint.route('/eliminarProducto/<int:idProducto>')
