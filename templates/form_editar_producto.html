@@ -15,10 +15,10 @@
         </nav>
     </div>
     <div class="container">
-        <form class="product-form" action="/editarP/{{ producto.idProducto }}" method="GET">
+        <form class="product-form" action="/editarProducto/{{ producto.idProducto }}" method="GET">
             
             <div class="form-group">
-                <label for="nombre">Nombre: {{ producto.idProducto }}</label>
+                <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required value="{{producto.nombre}}">
             </div>
 
@@ -33,10 +33,11 @@
             </div>
             <div class="form-group">
                 <label for="cant_inventario">Cantidad inventario:</label>
-                <input type="number" id="cant_inventario" name="cant_inventario" step="1" value="{{ producto.cantidadInventario }}" required>
+                <input type="number" id="cant_inventario" name="cant_inventario" step="1" value="{{ producto.cant_inventario }}" required>
             </div>
-
-            <input type="submit" value="Actualizar">
+            <div class="form-group">
+                <input type="submit" value="Actualizar">
+            </div>
         </form>
     </div>
 </body>
