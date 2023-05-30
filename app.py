@@ -1,12 +1,11 @@
 from flask import Flask, render_template, url_for, redirect, request, Blueprint, jsonify
-from controllers.login import loginBlueprint
 from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from controllers.ControladorUsuario import registro_cliente_blueprint
+from controllers.ControladorUsuario import registro_cliente_blueprint, login_usuario_blueprint
 
-from controllers.ControladorProducto import consulta_productos_blueprint
+from controllers.ControladorProducto import productos_blueprint
 
 
 DATABASE_NAME = "micheladasatucasa"
@@ -16,9 +15,9 @@ DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
 app.register_blueprint(registro_cliente_blueprint)
-app.register_blueprint(loginBlueprint)
+app.register_blueprint(login_usuario_blueprint)
 
-app.register_blueprint(consulta_productos_blueprint)
+app.register_blueprint(productos_blueprint)
 
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + DATABASE_USERNAME + ':' + DATABASE_PASSWORD + '@' + DATABASE_HOST + '/' + DATABASE_NAME
@@ -47,22 +46,22 @@ def editar_producto(idProducto):
 # ---------------------------
 @app.route('/registrarProducto', methods=['GET', 'POST'])
 def registro_producto():
-    return redirect(url_for('consulta_productos_blueprint.agregar_producto'))
+    return redirect(url_for('productos_blueprint.agregar_producto'))
 
 # ---------------------------
 @app.route('/productos')
 def mostrar_productos():
-    return redirect(url_for('consulta_productos_blueprint.productos'))
+    return redirect(url_for('productos_blueprint.productos'))
 
 # ---------------------------
 @app.route('/producto/<int:idProducto>')
 def mostrar_producto(idProducto):
-    return redirect(url_for('consulta_productos_blueprint.mostrar_producto', idProducto=idProducto))
+    return redirect(url_for('productos_blueprint.mostrar_producto', idProducto=idProducto))
 
 # ---------------------------
 @app.route('/eliminarProducto/<int:idProducto>')
 def eliminar_producto(idProducto):
-    return redirect(url_for('consulta_productos_blueprint.eliminar_producto', idProducto=idProducto))
+    return redirect(url_for('productos_blueprint.eliminar_producto', idProducto=idProducto))
 
 # ---------------------------
 @app.route("/")
@@ -73,10 +72,7 @@ def home():
 # ---------------------------
 @app.route("/login", methods=["GET","POST"])
 def login():
-    if request.method == "POST":
-        return redirect(url_for("login.login"))
-    else:
-        return render_template("login.html")
+    return redirect(url_for("login.login_usuario"))
 # ---------------------------
 @app.route("/registro-cliente", methods=["GET","POST"])
 def registro_cliente():

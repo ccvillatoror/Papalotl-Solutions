@@ -7,26 +7,26 @@ Este controlador maneja toda la lógica de los casos de uso
 que involucren a los productos
 '''
 
-consulta_productos_blueprint = Blueprint('producto', __name__, url_prefix="/")
+productos_blueprint = Blueprint('producto', __name__, url_prefix="/")
 
-@consulta_productos_blueprint.route('/productos')
+@productos_blueprint.route('/productos')
 def productos():
     productos = Producto.query.filter().all()
     return render_template("productos.html", productos=productos)
 
-@consulta_productos_blueprint.route('/producto/<int:idProducto>')
+@productos_blueprint.route('/producto/<int:idProducto>')
 def mostrar_producto(idProducto):
     producto = obtener_producto(idProducto)
     if producto is None:
         return render_template('errorProducto.html')
     return render_template('producto.html', producto=producto)
 
-@consulta_productos_blueprint.route('/eliminarProducto/<int:idProducto>')
+@productos_blueprint.route('/eliminarProducto/<int:idProducto>')
 def eliminar_producto(idProducto):
     borra_Producto(idProducto)
     return redirect('/productos')
 
-@consulta_productos_blueprint.route('/registrarProducto', methods=['GET', 'POST'])
+@productos_blueprint.route('/registrarProducto', methods=['GET', 'POST'])
 def agregar_producto():
     if request.method == 'POST' or request.method == 'GET':
         nombre = request.args.get('nombre')
@@ -43,7 +43,7 @@ def agregar_producto():
     else:
         return render_template('form_registrar_producto.html')
 
-@consulta_productos_blueprint.route('/editarProducto/<int:idProducto>', methods=['GET'])
+@productos_blueprint.route('/editarProducto/<int:idProducto>', methods=['GET'])
 def editar_producto(idProducto):
     producto = obtener_producto(idProducto)
     if request.method == 'GET':

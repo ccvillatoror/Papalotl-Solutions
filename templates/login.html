@@ -2,69 +2,19 @@
 <html>
 <head>
   <title>Ingresar</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f2f2f2;
-    }
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #ffffff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      text-align: center;
-    }
-    input{
-       max-width: 92%;
-       margin: 0 auto;
-       padding: 20px;
-       border: 1px solid #ccc;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-    .form-group input[type="text"],
-    .form-group input[type="password"] {
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    .form-group button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      font-size: 16px;
-      background-color: #4caf50;
-      color: #ffffff;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style-login.css') }}">
 </head>
 <body>
   <div class="container">
     <h2>Ingresar</h2>
-    <form>
+    <form action="" method="POST">
       <div class="form-group">
-        <label for="username">Correo:</label>
-        <input type="text" id="username" name="correo" required>
+        <label for="correo">Correo:</label>
+        <input type="text" id="correo" name="correo" required value="{{ request.form.correo }}">
       </div>
       <div class="form-group">
-        <label for="password">Contraseña:</label>
-        <input type="password" id="password" name="contrasena" required>
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" required value="{{ request.form.contrasena }}">
       </div>
       <div class="form-group">
         <button type="submit">Ingresar</button>
