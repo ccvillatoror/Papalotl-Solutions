@@ -4,6 +4,7 @@
 <head>
     <title>Detalles del producto</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-producto.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
 </head>
 
 <body>
@@ -13,6 +14,7 @@
             <ul>
                 <li><a href="../registrarProducto">Agregar producto</a></li>
                 <li><a href="../productos">Consultar productos</a></li>
+                <li><a href="../logout">Cerrar sesion</a></li>
             </ul>
         </nav>
     </div>
@@ -22,7 +24,7 @@
                 <h2 class="product-title"><strong>Nombre:</strong> {{ producto.nombre }}</h2>
                 <p class="product-price"><strong>Precio:</strong> {{ producto.precio }}</p>
                 <p class="product-description"><strong>Descripción:</strong>{{ producto.descripcion }}</p>
-                <p class="product-price"><strong>Cantidad en Inventario:</strong> {{ producto.cantidadInventario }}</p>
+                <p class="product-price"><strong>Cantidad en Inventario:</strong> {{ producto.cant_inventario }}</p>
                 <a class="product-button" href="../editarProducto/{{ producto.idProducto }}">Editar</a>
                 <a class="product-button" href="../eliminarProducto/{{ producto.idProducto }}">Eliminar</a>
             </div>
