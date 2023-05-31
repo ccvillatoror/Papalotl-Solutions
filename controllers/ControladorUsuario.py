@@ -16,14 +16,14 @@ def registro_cliente():
         nombre = request.form['nombre']
         apellido_p = request.form['apellido_p']
         apellido_m = request.form['apellido_m']
-        email = request.form['correo']
+        correo = request.form['correo']
         fecha_nacimiento = request.form['fecha_nac']
         fecha_nacimiento = datetime.strptime(fecha_nacimiento, '%Y-%m-%d')
         contrasena = request.form['contrasena']
 
-        usuario = Usuario(nombre, apellido_p, email, contrasena, fecha_nacimiento, 'Cliente', apellido_m=apellido_m)
+        usuario = Usuario(nombre, apellido_p, correo, contrasena, fecha_nacimiento, 'Cliente', apellido_m=apellido_m)
 
-        if obtener_usuario(email):
+        if obtener_usuario(correo):
             #flash("Error: El correo ya está registado en un usuario.")
             return redirect(url_for("registro_cliente"))
         else:

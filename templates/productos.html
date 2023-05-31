@@ -2,9 +2,22 @@
 <html>
 <head>
     <title>Lista de productos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-producto.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
 </head>
 <body>
-    <h1>Lista de productos</h1>
+    <div class="header">
+        <h1>Lista de productos</h1>
+        {% if session['usuario']%}
+        <nav class="navbar">
+            <ul>
+                {% if session['tipo_usuario'] == 'Administrador' %}
+                    <li><a href="./registrarProducto">Agregar producto</a></li>
+                {% endif %}
+                <li><a href="./logout">Cerrar sesion</a></li>
+            </ul>
+        </nav>
+    </div>
     <table>
         <thead>
             <tr>
@@ -17,15 +30,19 @@
         </thead>
         <tbody>
             {% for producto in productos %}
-            <tr>
-                <td>{{ producto.id }}</td>
+            <tr  onclick="window.location.href='/producto/{{producto.idProducto}}'">
+                <td>{{ producto.idProducto }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precio }}</td>
-                <td>{{ producto.cantidadInventario }}</td>
+                <td>{{ producto.cant_inventario }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+        <h1>Debe iniciar sesion para ver esta pagina</h1>
+        <button onclick="window.location.href='./login'" class="button-login">Iniciar sesion</button>
+    {% endif %}
 </body>
 </html>
