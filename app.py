@@ -4,7 +4,7 @@ from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from controllers.ControladorUsuario import registro_cliente_blueprint
+from controllers.ControladorUsuario import registro_cliente_blueprint,direccion_envio_blueprint, pago_blueprint
 
 
 
@@ -16,6 +16,8 @@ DATABASE_HOST = "localhost:3306"
 app = Flask(__name__)
 app.register_blueprint(registro_cliente_blueprint)
 app.register_blueprint(loginBlueprint)
+app.register_blueprint(direccion_envio_blueprint)
+app.register_blueprint(pago_blueprint)
 #app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://natalia:ati_desa15@localhost:3306/prueba"
 
 app.config[
@@ -116,9 +118,11 @@ def mostrar_productos_eliminar():
 
 @app.route("/")
 def home():
+    '''
     productos = Producto.query.filter().all()
     return render_template("casa.html", productos=productos)
-
+    '''
+    return render_template("comprar_producto.html")
 @app.route("/login", methods=["GET","POST"])
 def login():
     if request.method == "POST":
@@ -139,7 +143,10 @@ def producto():
 
 @app.route("/direccion-envio", methods=["GET", "POST"])
 def dirección():
-    return render_template("direccion_envío.html")
+    if request.method == "POST":
+        return redirect(url_for("direccion_envio.direccion_envio"))
+    else:
+        return render_template("direccion_envío.html")
 
 @app.route("/pago", methods=["GET", "POST"])
 def pago():
