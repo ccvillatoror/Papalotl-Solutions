@@ -14,7 +14,9 @@ def login_usuario():
                 session['usuario'] = usuario.correo
                 if usuario.tipo_usuario != "Cliente":
                     session['tipo_usuario'] = usuario.tipo_usuario
-                return redirect(url_for("producto.productos"))
+                    return redirect(url_for("producto.productos"))
+                else:
+                    return redirect(url_for("home"))
             else:
                 return "Error: Contraseña incorrecta."
         else:
