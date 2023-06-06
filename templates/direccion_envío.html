@@ -54,6 +54,15 @@
     }
   </style>
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <body>
   <div class="container">
     <h2>Ingresa la dirección de envío</h2>
@@ -84,7 +93,7 @@
       </div>
       <div class="form-group">
         <label for="ciudad">Ciudad:</label>
-        <input type="text" id="text" name="text" required value="{{
+        <input type="text" id="ciudad" name="ciudad" required value="{{
                 request.form.ciudad
                 }}">
       </div>

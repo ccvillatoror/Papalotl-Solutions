@@ -3,8 +3,7 @@ from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-
-from controllers.ControladorUsuario import registro_cliente_blueprint
+from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint, pago_blueprint
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
 
@@ -16,10 +15,11 @@ DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
 app.register_blueprint(registro_cliente_blueprint)
-
 app.register_blueprint(login_usuario_blueprint)
 app.register_blueprint(logout_usuario_blueprint)
-
+app.register_blueprint(loginBlueprint)
+app.register_blueprint(direccion_envio_blueprint)
+app.register_blueprint(pago_blueprint)
 app.register_blueprint(productos_blueprint)
 
 app.config[
@@ -96,7 +96,10 @@ def producto():
 
 @app.route("/direccion-envio", methods=["GET", "POST"])
 def dirección():
-    return render_template("direccion_envío.html")
+    if request.method == "POST":
+        return redirect(url_for("direccion_envio.direccion_envio"))
+    else:
+        return render_template("direccion_envío.html")
 
 @app.route("/pago", methods=["GET", "POST"])
 def pago():
