@@ -92,9 +92,8 @@
     <div class="descripcion-pedido">
         <h3>Descripción</h3>
       <p>Fecha: {{ pedido.fecha }}</p>
-      <p>Cantidad: {{ cantidad }}</p>
-      <p>Producto: {{ producto.nombre }}</p>
-      <p>{{ producto.descripcion }}<p>
+      <p>Cantidad: {{ pedido.cantidad }}</p>
+      <p>Producto: {{ pedido.producto }}</p>
     </div>
     <div class="total-label">
       Total: <span id="total">${{ pedido.total }}</span>
@@ -109,7 +108,7 @@
       <p>Ciudad: {{ cliente.dir_ciudad }}</p>
       <p>Estado: {{ cliente.dir_estado }}</p>
     </div>
-    <button onclick="window.location.href='/pedidos'">Marcar como enviado</button>
+    <button onclick="window.location.href='/pedido/{{ pedido.id_pedido }}/exito'">Marcar como enviado.</button>
   </div>
 </body>
 </html></title>
