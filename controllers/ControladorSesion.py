@@ -15,7 +15,7 @@ def login_usuario():
                 if usuario.tipo_usuario != "Cliente":
                     session['tipo_usuario'] = usuario.tipo_usuario
                     if usuario.tipo_usuario == "Administrador":
-                        return render_template("administrador.html")
+                        return redirect(url_for("administrador"))
                     else: 
                         return redirect(url_for("producto.productos"))
                 else:

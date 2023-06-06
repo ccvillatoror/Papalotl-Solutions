@@ -12,8 +12,8 @@ from controllers.ControladorUsuario import registro_cliente_blueprint, direccion
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
 DATABASE_NAME = "micheladasatucasa"
-DATABASE_USERNAME = "root"
-DATABASE_PASSWORD = "root"
+DATABASE_USERNAME = "natalia"
+DATABASE_PASSWORD = "ati_desa15"
 DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
@@ -75,7 +75,10 @@ def login():
 @app.route("/logout")
 def logout():
     return redirect(url_for("logout.logout_usuario"))
-
+# ---------------------------
+@app.route("/administrador")
+def administrador():
+    return render_template("administrador.html")
 # ---------------------------
 @app.route("/registro-cliente", methods=["GET","POST"])
 def registro_cliente():
