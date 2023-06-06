@@ -15,14 +15,13 @@
       </div>
     </div>
   <div class="container">
-  <form action="#" method="post">
     {% for producto in productos %}
     <div class="product">
       <img src="product1.jpg" alt="Pedido 1">
       <h2>{{ producto.nombre }}</h2>
       <p>{{ producto.descripcion }}</p>
       <p class="price">${{ producto.precio }}</p>
-      <button onclick="window.location.href='/comprar-producto/{{ producto.idProducto }}'">Comprar</button>
+      <button type="submit" onclick="window.location.href='/comprar-producto/{{ producto.idProducto }}'">Comprar</button>
     </div>
     {% endfor %}
     <!-- Add more product elements as needed -->

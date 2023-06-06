@@ -67,11 +67,11 @@
       <label for="quantity" class="quantity-label">Cantidad:</label>
       <select id="quantity" name="cantidad" class="quantity-select" onchange="updateTotal()">
           {% for cant in inventario %}
-        <option value="cant">cant</option>
+        <option value="cant">{{cant}}</option>
           {% endfor %}
         <!-- Add more options as needed -->
       </select>
-      <button type="submit">Comprar</button>
+      <button type="submit" name="comprar" value="comprar">Comprar</button>
     </div>
     <div class="total-label">
       Total: <span id="total">{{producto.precio}}</span>

@@ -13,6 +13,7 @@ def comprar_producto(idProducto):
         correo = session['usuario']
         usuario = obtener_usuario(correo)
         producto = obtener_producto(idProducto)
+        inventario = [i+1 for i in range(producto.cant_inventario)]
 
         if request.method == 'POST':
             # Request.form
@@ -25,10 +26,12 @@ def comprar_producto(idProducto):
 
             session['pedido'] = Pedido(total, 1, 0)
             session['cantidad'] = cantidad
+            session['fecha_pedido'] = session['pedido'].fecha
+            print(session['pedido'])
             #return redirect(url_for("direccion_evio"))
-            return session['pedido']
+            return redirect(url_for("direccion-envio"))
         else:
-            return render_template('comprar_producto.html')
+            return render_template('comprar_producto.html', producto=producto, inventario=inventario)
     else:
         flash("Inicia sesión antes de comprar.")
         return redirect(url_for("login"))
