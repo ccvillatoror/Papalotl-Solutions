@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+
+{%block title%}Catalog{%endblock%}
+
+{%block content%}
+
+<div class="container d-flex flex-column bg-light mt-5">
+    <div class="container text-center mb-5">
+        <h1>Search for Item in Catalog or Create New</h1>
+    </div>
+    <div class="container d-flex align-items-center">
+        <div class="container d-flex flex-column col-4 text-center align-items-center">
+            <h3>Search Base</h3>
+            <a href="{{url_for('list_products')}}"><img src="{{url_for('static',filename='images/search.png')}}" alt="" style="margin: 2em; height: 10em; width: 10em;"></a>
+        </div>
+        <div class="container d-flex flex-column col-4 text-center align-items-center">
+            <h3>Create New</h3>
+            <a href="{{url_for('create_product')}}"><img src="{{url_for('static',filename='images/add-file.png')}}" alt="" style="margin: 2em; height: 10em; width: 10em;"></a>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}
