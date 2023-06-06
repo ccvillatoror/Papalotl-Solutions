@@ -2,10 +2,13 @@ from flask import Flask, render_template, url_for, redirect, request
 
 from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
+
+from sqlalchemy import text
 from controllers.ControladorPedido import pedidos_blueprint
 from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint, pago_blueprint
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
+from controllers.ControladorComprar import comprar_producto_blueprint, pago_blueprint
 
 DATABASE_NAME = "micheladasatucasa"
 DATABASE_USERNAME = "root"
@@ -19,6 +22,7 @@ app.register_blueprint(logout_usuario_blueprint)
 app.register_blueprint(direccion_envio_blueprint)
 app.register_blueprint(pago_blueprint)
 app.register_blueprint(productos_blueprint)
+app.register_blueprint(comprar_producto_blueprint)
 app.register_blueprint(pedidos_blueprint)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+DATABASE_USERNAME+':'+DATABASE_PASSWORD+'@'+DATABASE_HOST+'/'+DATABASE_NAME
@@ -91,23 +95,32 @@ def registro_cliente():
     else:
         return render_template("registro_cliente.html")
 
+@app.route("/comprar-producto/<int:idProducto>", methods=["GET","POST"])
+def producto(idProducto):
+    if request.method == 'POST':
+        return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
+    else:
+        return redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
+
+@app.route("/direccion-envio/<int:idProducto>", methods=["GET", "POST"])
+def dirección(idProducto):
+    if request.method == "POST":
+        return redirect(url_for("direccion_envio.direccion_envio", idProducto=idProducto))
+    else:
+        return render_template("direccion_envío.html", idProducto=idProducto)
+
 # ---------------------------
 @app.route("/producto", methods=["GET","POST"])
 def producto():
     return render_template("producto.html")
 
 # ---------------------------
-@app.route("/direccion-envio", methods=["GET", "POST"])
-def dirección():
-    if request.method == "POST":
-        return redirect(url_for("direccion_envio.direccion_envio"))
-    else:
-        return render_template("direccion_envío.html")
-
-# ---------------------------
 @app.route("/pago", methods=["GET", "POST"])
 def pago():
-    return render_template("pago.html")
+    if request.method == 'POST':
+        return redirect(url_for("pago.pago"))
+    else:
+        return render_template("pago.html")
 
 # ---------------------------
 @app.route('/pedidos')

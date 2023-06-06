@@ -28,7 +28,7 @@ create table registra (id_insumo int not null, id_usuario int not null, foreign 
 create table consume (id_producto int not null, id_insumo int not null, foreign key (id_producto) references producto(idProducto),
                       foreign key (id_insumo) references insumo (idInsumo));
                       
-create table conforma (id_pedido int not null, id_producto int not null, foreign key (id_pedido) references pedido (idPedido),
+create table conforma (id_pedido int not null, id_producto int not null, cantidad int not null, foreign key (id_pedido) references pedido (idPedido),
                        foreign key (id_producto) references producto(idProducto));
 
                     

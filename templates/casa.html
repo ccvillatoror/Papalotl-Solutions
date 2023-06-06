@@ -34,7 +34,7 @@
       <p>{{ producto.descripcion }}</p>
       <p class="price">${{ producto.precio }}</p>
       {% if session['usuario']%}
-        <button>Comprar</button>
+        <button type="submit" onclick="window.location.href='/direccion-envio/{{ producto.idProducto }}'">Comprar</button>
       {% endif %}
     </div>
     {% endfor %}

@@ -14,12 +14,14 @@ def login_usuario():
                 session['usuario'] = usuario.correo
                 if usuario.tipo_usuario != "Cliente":
                     session['tipo_usuario'] = usuario.tipo_usuario
+
                     if usuario.tipo_usuario == "Administrador":
                         return redirect(url_for("administrador"))
                     else: 
                         return redirect(url_for("vendedor"))
                 else:
                         return redirect(url_for("home"))
+                 
             else:
                 return "Error: Contraseña incorrecta."
         else:

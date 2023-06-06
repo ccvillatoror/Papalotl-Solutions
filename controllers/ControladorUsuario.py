@@ -1,7 +1,10 @@
-from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for,json
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from datetime import datetime
 from alchemyClasses.Usuario import Usuario
+from alchemyClasses.Pedido import Pedido
 from models.model_usuario import obtener_usuario, registrar_usuario, actualizar_direccion_envio
+from models.modelo_producto import obtener_producto
+from models.ModeloPedido import registrar_pedido, obtener_pedido_fecha
 
 '''
 Este controlador maneja toda la lógica de los casos de uso
@@ -35,26 +38,35 @@ def registro_cliente():
 
 
 direccion_envio_blueprint = Blueprint('direccion_envio', __name__, url_prefix="/direccion-envio")
-@direccion_envio_blueprint.route('/', methods=['GET', 'POST'])
-def direccion_envio():
+@direccion_envio_blueprint.route('/direccion-envio/<int:idProducto>', methods=['GET', 'POST'])
+def direccion_envio(idProducto):
     if 'usuario' in session:
         correo = session['usuario']
         usuario = obtener_usuario(correo)
-        if request.method == 'POST':
+        producto = obtener_producto(idProducto)
 
+        if request.method == 'POST':
             calle = request.form['calle']
+            session['calle'] = calle
             num = request.form['num']
             cp = request.form['cp']
             colonia = request.form['colonia']
             ciudad = request.form['ciudad']
             estado = request.form['estado']
-            dirección = [calle, num, cp, colonia, ciudad, estado]
 
             actualizar_direccion_envio(usuario, calle, num, cp, colonia, ciudad, estado)
+            flash("La dirección se ha guardado.")
 
-            # TODO: Recuperar Dirección si hay
-            # TODO: Actualizar los datos (?)
-            return dirección
+            precio = producto.precio
+            pedido = registrar_pedido(Pedido(precio, 1, 0))
+
+
+            session['pedido'] = pedido.id_pedido
+            session['cantidad'] = 1
+            session['fecha_pedido'] = pedido.fecha
+            session['producto'] = producto.idProducto
+
+            return redirect(url_for("pago"))
         else:
             calle = usuario.dir_calle
             num = usuario.dir_num
@@ -62,22 +74,11 @@ def direccion_envio():
             colonia = usuario.dir_colonia
             ciudad = usuario.dir_ciudad
             estado = usuario.dir_estado
-            return render_template('direccion_envío.html')
+            return render_template('direccion_envío.html', calle=calle, num=num,
+                                   cp=cp, colonia=colonia, ciudad=ciudad, estado=estado)
 
     else:
         flash("Inicia sesión antes de comprar.")
         return redirect(url_for("login"))
 
 
-pago_blueprint = Blueprint('pago', __name__, url_prefix="/pago")
-@pago_blueprint.route('/', methods=['GET', 'POST'])
-def pago():
-    if request.method == 'POST':
-        print('POST gege')
-        flash("Pago exitoso.")
-        flash("La compra ha sido registrada.")
-        # TODO: Crear la transacción
-        return render_template('casa.html')
-    else:
-        print('GET jeje')
-        return render_template('casa.html')
