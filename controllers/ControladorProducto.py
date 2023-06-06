@@ -14,16 +14,16 @@ def productos():
     productos = Producto.query.filter().all()
     return render_template("productos.html", productos=productos)
 
-@productos_blueprint.route('/producto/<int:idProducto>')
-def mostrar_producto(idProducto):
-    producto = obtener_producto(idProducto)
+@productos_blueprint.route('/producto/<int:id_producto>')
+def mostrar_producto(id_producto):
+    producto = obtener_producto(id_producto)
     if producto is None:
         return "No existe el producto"
     return render_template('producto.html', producto=producto)
 
-@productos_blueprint.route('/eliminarProducto/<int:idProducto>')
-def eliminar_producto(idProducto):
-    borra_Producto(idProducto)
+@productos_blueprint.route('/eliminarProducto/<int:id_producto>')
+def eliminar_producto(id_producto):
+    borra_Producto(id_producto)
     return redirect('/productos')
 
 @productos_blueprint.route('/registrarProducto', methods=['GET', 'POST'])
@@ -43,9 +43,9 @@ def agregar_producto():
     else:
         return render_template('form_registrar_producto.html')
 
-@productos_blueprint.route('/editarProducto/<int:idProducto>', methods=['GET'])
-def editar_producto(idProducto):
-    producto = obtener_producto(idProducto)
+@productos_blueprint.route('/editarProducto/<int:id_producto>', methods=['GET'])
+def editar_producto(id_producto):
+    producto = obtener_producto(id_producto)
     if request.method == 'GET':
         nombre = request.args.get('nombre')
         des = request.args.get('descripcion')
@@ -54,7 +54,7 @@ def editar_producto(idProducto):
 
         if nombre is None or des is None or precio is None or cant is None:
             return render_template('form_editar_producto.html', producto=producto)
-        editar_Producto(idProducto, nombre, des, precio, cant)
+        editar_Producto(id_producto, nombre, des, precio, cant)
         return redirect('/productos')
     else:
         return render_template('form_editar_producto.html', producto=producto)

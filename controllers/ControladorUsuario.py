@@ -38,12 +38,12 @@ def registro_cliente():
 
 
 direccion_envio_blueprint = Blueprint('direccion_envio', __name__, url_prefix="/direccion-envio")
-@direccion_envio_blueprint.route('/direccion-envio/<int:idProducto>', methods=['GET', 'POST'])
-def direccion_envio(idProducto):
+@direccion_envio_blueprint.route('/direccion-envio/<int:id_producto>', methods=['GET', 'POST'])
+def direccion_envio(id_producto):
     if 'usuario' in session:
         correo = session['usuario']
         usuario = obtener_usuario(correo)
-        producto = obtener_producto(idProducto)
+        producto = obtener_producto(id_producto)
 
         if request.method == 'POST':
             calle = request.form['calle']
@@ -64,7 +64,7 @@ def direccion_envio(idProducto):
             session['pedido'] = pedido.id_pedido
             session['cantidad'] = 1
             session['fecha_pedido'] = pedido.fecha
-            session['producto'] = producto.idProducto
+            session['producto'] = producto.id_producto
 
             return redirect(url_for("pago"))
         else:

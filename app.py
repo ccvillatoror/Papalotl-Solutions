@@ -5,7 +5,7 @@ from alchemyClasses.Producto import Producto
 
 from sqlalchemy import text
 from controllers.ControladorPedido import pedidos_blueprint
-from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint, pago_blueprint
+from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
 from controllers.ControladorComprar import comprar_producto_blueprint, pago_blueprint
@@ -37,9 +37,9 @@ def create_app():
 create_app()
 
 # ---------------------------
-@app.route('/editarProducto/<int:idProducto>', methods=['GET'])
-def editar_producto(idProducto):
-    return redirect(url_for('editar_producto.editar_producto', idProducto=idProducto))
+@app.route('/editarProducto/<int:id_producto>', methods=['GET'])
+def editar_producto(id_producto):
+    return redirect(url_for('editar_producto.editar_producto', id_producto=id_producto))
 
 # ---------------------------
 @app.route('/registrarProducto', methods=['GET', 'POST'])
@@ -52,14 +52,14 @@ def mostrar_productos():
     return redirect(url_for('mostrar_productos.productos'))
 
 # ---------------------------
-@app.route('/producto/<int:idProducto>')
-def mostrar_producto(idProducto):
-    return redirect(url_for('mostrar_producto.mostrar_producto', idProducto=idProducto))
+@app.route('/producto/<int:id_producto>')
+def mostrar_producto(id_producto):
+    return redirect(url_for('mostrar_producto.mostrar_producto', id_producto=id_producto))
 
 # ---------------------------
-@app.route('/eliminarProducto/<int:idProducto>')
-def eliminar_producto(idProducto):
-    return redirect(url_for('eliminar_producto.eliminar_producto', idProducto=idProducto))
+@app.route('/eliminarProducto/<int:id_producto>')
+def eliminar_producto(id_producto):
+    return redirect(url_for('eliminar_producto.eliminar_producto', id_producto=id_producto))
 
 # ---------------------------
 @app.route("/")
@@ -95,24 +95,19 @@ def registro_cliente():
     else:
         return render_template("registro_cliente.html")
 
-@app.route("/comprar-producto/<int:idProducto>", methods=["GET","POST"])
-def producto(idProducto):
+@app.route("/comprar-producto/<int:id_producto>", methods=["GET","POST"])
+def producto(id_producto):
     if request.method == 'POST':
-        return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
+        return  redirect(url_for('comprar_producto.comprar_producto', id_producto=id_producto))
     else:
-        return redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
+        return redirect(url_for('comprar_producto.comprar_producto', id_producto=id_producto))
 
-@app.route("/direccion-envio/<int:idProducto>", methods=["GET", "POST"])
-def dirección(idProducto):
+@app.route("/direccion-envio/<int:id_producto>", methods=["GET", "POST"])
+def dirección(id_producto):
     if request.method == "POST":
-        return redirect(url_for("direccion_envio.direccion_envio", idProducto=idProducto))
+        return redirect(url_for("direccion_envio.direccion_envio", id_producto=id_producto))
     else:
-        return render_template("direccion_envío.html", idProducto=idProducto)
-
-# ---------------------------
-@app.route("/producto", methods=["GET","POST"])
-def producto():
-    return render_template("producto.html")
+        return render_template("direccion_envío.html", id_producto=id_producto)
 
 # ---------------------------
 @app.route("/pago", methods=["GET", "POST"])

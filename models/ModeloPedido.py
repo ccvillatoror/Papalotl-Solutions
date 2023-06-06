@@ -16,21 +16,23 @@ def crear_pedido(total, estatus):
 def info_basica(id_pedido):
     info_pedido = {}
     pedido = Pedido.query.filter(Pedido.id_pedido == id_pedido).first()
-    id_producto = Conforma.query.filter(
-        Conforma.id_pedido == id_pedido).first().id_producto
-    info_pedido["id_producto"] = id_producto
-    info_pedido["id_pedido"] = id_pedido
-    info_pedido["total"] = pedido.total
-    info_pedido["fecha"] = pedido.fecha
-    cantidad = Conforma.query.filter(
-        Conforma.id_pedido == id_pedido).first().cantidad
-    producto = Producto.query.filter(
-        Producto.id_producto == id_producto).first().nombre
-    info_pedido["cantidad"] = cantidad
-    info_pedido["producto"] = producto
-    id_cliente = Ordena.query.filter(
-        Ordena.id_pedido == id_pedido).first().id_usuario
-    info_pedido["id_cliente"] = id_cliente
+    pedido_producto =Conforma.query.filter(
+        Conforma.id_pedido == id_pedido).first()
+    if pedido_producto is not None:
+        id_producto = pedido_producto.id_producto
+        info_pedido["id_producto"] = id_producto
+        info_pedido["id_pedido"] = id_pedido
+        info_pedido["total"] = pedido.total
+        info_pedido["fecha"] = pedido.fecha
+        cantidad = Conforma.query.filter(
+            Conforma.id_pedido == id_pedido).first().cantidad
+        producto = Producto.query.filter(
+            Producto.id_producto == id_producto).first().nombre
+        info_pedido["cantidad"] = cantidad
+        info_pedido["producto"] = producto
+        id_cliente = Ordena.query.filter(
+            Ordena.id_pedido == id_pedido).first().id_usuario
+        info_pedido["id_cliente"] = id_cliente
     return info_pedido
 
 def atender(id_pedido):
