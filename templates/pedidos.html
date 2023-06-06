@@ -71,6 +71,15 @@
     }
   </style>
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <body>
   <div class="container">
     <div class="header">
@@ -81,7 +90,8 @@
     {% for pedido in pedidos %}
     <div class="product">
       <h3>Pedido {{ pedido.id_pedido }}</h3>
-      <p class="cantidad">#</p>
+      <p class="fecha">{{ pedido.fecha }}</p>
+      <p class="cantidad">{{ pedido.cantidad }} {{ pedido.producto }} (s).</p>
       <p class="total">${{ pedido.total }}</p>
       <button onclick="window.location.href='/pedido/{{ pedido.id_pedido }}'">Atender</button>
     </div>

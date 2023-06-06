@@ -10,6 +10,7 @@ from alchemyClasses.Ordena import Ordena
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from controllers.ControladorUsuario import registro_cliente_blueprint
+from models.ModeloPedido import obtener_info
 
 DATABASE_NAME = "micheladasatucasa"
 DATABASE_USERNAME = "root"
@@ -135,26 +136,12 @@ def registro_cliente():
     else:
         return render_template("registro_cliente.html")
 
-@app.route("/<usr>")
-def user(usr):
-
-
-    '''f usr is not None:
-        if isinstance(usr,Pedido):
-            return f"<h1>{usr.total}</h1>"
-        else:
-            tipo = type(usr)
-            print(tipo)
-            print(usr)
-            return f"<h1>No es instancia de Pedido, es {tipo}</h1>"
-    else:
-        return f"<h1>Es Nulo    </h1>"'''
-
-    return f"<h1>{usr}</h1>"
-
 @app.route('/pedidos')
 def mostrar_pedidos():
     pedidos = Pedido.query.filter(Pedido.estatus).all()
+    get_id = lambda x : x.id_pedido
+    id_pedidos = list(map(get_id, pedidos))
+    pedidos = list(map(obtener_info, id_pedidos))
     return render_template('pedidos.html', pedidos=pedidos)
 
 @app.route('/pedido/<int:id_pedido>')
