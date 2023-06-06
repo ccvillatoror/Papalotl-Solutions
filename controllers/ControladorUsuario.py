@@ -64,7 +64,7 @@ def direccion_envio(idProducto):
             session['pedido'] = pedido.id_pedido
             session['cantidad'] = 1
             session['fecha_pedido'] = pedido.fecha
-            session['producto'] = producto
+            session['producto'] = producto.idProducto
 
             return redirect(url_for("pago"))
         else:
