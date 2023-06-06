@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Datos de Pago</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="month"],
+    .form-group input[type="number"],
+    .form-group input[type="text"],
+    .form-group select{
+      width: 92%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .form-group button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Ingresa los datos de pago</h2>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="num_tarjeta">Número de tarjeta:</label>
+        <input type="text" id="num_tarjeta" name="num_tarjeta" required>
+      </div>
+      <div class="form-group">
+        <label for="fecha_ven">Fecha de vencimiento:</label>
+        <input type="month" id="fecha_ven" name="fecha_ven" required value="{{
+                request.form.num
+                }}">
+        <label for="cvv">cvv:</label>
+        <input type="text" id="cvv" name="cvv">
+      </div>
+      <div class="form-group">
+        <button type="submit" onclick="window.location.href='/pago'">Continuar a Pago</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Editar producto</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-product-form.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
 </head>
+
 <body>
-    <h1>Editar producto</h1>
-    <form action="/editarProducto/{{ producto.id }}" method="POST">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" value="{{ producto.nombre }}" required>
+    <div class="header">
+        <h1>Editar producto</h1>
+    {% if session['usuario']%}
+        <nav class="navbar">
+            <ul>
+                {% if session['tipo_usuario'] == 'Administrador' %}
+                    <li><a href="../registrarProducto">Agregar producto</a></li>
+                {% endif %}
+                <li><a href="../productos">Consultar productos</a></li>
+                <li><a href="../logout">Cerrar sesion</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container">
+        <form class="product-form" action="/editarProducto/{{ producto.idProducto }}" method="GET">
 
-        <label for="descripcion">Descripción:</label>
-        <input type="text" id="descripcion" name="descripcion" value="{{ producto.descripcion }}">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required value="{{producto.nombre}}">
+            </div>
 
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" name="precio" step="0.01" value="{{ producto.precio }}" required>
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" id="descripcion" name="descripcion" value="{{producto.descripcion}}">
+            </div>
 
-        <input type="submit" value="Actualizar">
-    </form>
+            <div class="form-group">
+                <label for="precio">Precio:</label>
+                <input type="number" id="precio" name="precio" step="0.01" value="{{ producto.precio }}" required>
+            </div>
+            <div class="form-group">
+                <label for="cant_inventario">Cantidad inventario:</label>
+                <input type="number" id="cant_inventario" name="cant_inventario" step="1"
+                    value="{{ producto.cant_inventario }}" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Actualizar">
+            </div>
+        </form>
+    </div>
+{% else %}
+    <h1>Debe iniciar sesion para ver esta pagina</h1>
+    <button onclick="window.location.href='./login'" class="button-login">Iniciar sesion</button>
+{% endif %}
 </body>
+
 </html>

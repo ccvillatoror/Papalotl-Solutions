@@ -8,7 +8,12 @@ class Pedido(db.Model):
     estatus = db.Column('estatus', db.Boolean)
     fecha = db.Column('fecha', db.DateTime)
 
-    def __init__(self, total, estatus):
+    def __init__(self, total, estatus,fecha):
         self.total = total
         self.estatus = estatus
         self.fecha = datetime.datetime.now()
+        
+    def reporte_pedido(self, total, estatus, fecha):
+        self.total = total
+        self.estatus = estatus
+        self.fecha = fecha
