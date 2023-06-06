@@ -1,6 +1,8 @@
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for,json
+import sqlalchemy
 from alchemyClasses.Producto import Producto
 from models.modelo_producto import obtener_producto, registrar_Producto, borra_Producto,editar_Producto
+
 
 '''
 Este controlador maneja toda la lógica de los casos de uso
@@ -36,9 +38,16 @@ def agregar_producto():
 
         if nombre is None or des is None or precio is None or cant is None:
             return render_template('form_registrar_producto.html')
-        
-        producto = Producto(cant, nombre, des, precio)
-        registrar_Producto(producto)
+        try:
+            producto = Producto(cant, nombre, des, precio)
+            registrar_Producto(producto)
+        except sqlalchemy.exc.DBAPIError as e:
+            # Handle the DataError exception
+            print(f"DataError occurred: {str(e)}")
+            return "Error al registrar el producto. El nombre es muy largo."
+        except Exception as e:
+            print(e)
+            return "Error al registrar el producto. Verifique los datos."
         return redirect('/productos')
     else:
         return render_template('form_registrar_producto.html')
