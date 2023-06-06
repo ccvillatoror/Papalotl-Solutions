@@ -1,4 +1,9 @@
-body {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Micheladas a tu casa</title>
+  <style>
+    body {
       font-family: Arial, sans-serif;
       background-color: #f2f2f2;
       margin: 0;
@@ -64,3 +69,31 @@ body {
       margin-left: 10px;
       width: 10%
     }
+  </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Micheladas a tu casa</h1>
+      <h2>Pedido {{ id_pedido }}</h2>
+      <div align="right" class="header-buttons">
+        <button onclick="window.location.href='/'">Vendedor</button>
+      </div>
+    </div>
+    <div class="anuncio">
+        <h3>Pedido actualizado con exito</h3>
+      <p>El pedido ha sido registrado como enviado exitosamente</p>
+    </div>
+    <button onclick="window.location.href='/pedidos'">Ok! Volver a los pedidos.</button>
+  </div>
+</body>
+</html>

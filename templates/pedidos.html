@@ -2,25 +2,38 @@
 <html>
 <head>
   <title>Pedidos</title>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-pedidos.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-casa.css') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <body>
   <div class="container">
     <div class="header">
       <h1>Micheladas a tu casa</h1>
-        <h2>Pedidos</h2>
+      <h2>Pedidos</h2>
+      <div align="right" class="header-buttons">
+        <button onclick="window.location.href='/vendedor'">Vendedor</button>
+      </div>
     </div>
   <div class="container">
     {% for pedido in pedidos %}
-    <div class="product">
-      <h2>Pedido {{ pedido.idPedido }}</h2>
-      <p class="cantidad">5</p>
+    <div class="pedido">
+      <h3>Pedido {{ pedido.id_pedido }}</h3>
+      <p class="fecha">{{ pedido.fecha }}</p>
+      <p class="cantidad">{{ pedido.cantidad }} {{ pedido.producto }} (s).</p>
       <p class="total">${{ pedido.total }}</p>
-      <button onclick="window.location.href='/producto'">Atender</button>
+      <button onclick="window.location.href='/pedido/{{ pedido.id_pedido }}'">Atender</button>
     </div>
     {% endfor %}
-    <!-- Add more product elements as needed -->
+  </div>
   </div>
   <div class="footer">
     &copy; 2023 Micheladas a tu casa. Todos los derechos reservados.

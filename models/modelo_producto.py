@@ -2,13 +2,13 @@ from alchemyClasses.Producto import Producto
 from alchemyClasses.__init__ import db
 
 def obtener_producto(idProducto):
-    ans = Producto.query.filter(Producto.idProducto == idProducto).first()
+    ans = Producto.query.filter(Producto.id_producto == idProducto).first()
     return ans
 
 def registrar_Producto(nuevo_Producto):
     db.session.add(nuevo_Producto)
     db.session.commit()
-    ans = Producto.query.filter(Producto.idProducto == nuevo_Producto.idProducto).first()
+    ans = Producto.query.filter(Producto.id_producto == nuevo_Producto.id_producto).first()
     return ans
 
 def borra_Producto(idProducto):

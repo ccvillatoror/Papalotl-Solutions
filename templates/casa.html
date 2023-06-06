@@ -5,26 +5,39 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-casa.css') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <body>
   <div class="container">
     <div class="header">
       <h1>Micheladas a tu casa</h1>
       <div align="right" class="header-buttons">
-        <button onclick="window.location.href='/login'">Ingresar</button>
-        <button onclick="window.location.href='/registro-cliente'">Registrarme</button>
-      </div>
+        {% if not session['usuario']%}
+          <button onclick="window.location.href='/login'">Ingresar</button>
+          <button onclick="window.location.href='/registro-cliente'">Registrarme</button>
+        {% else %}
+          <button onclick="window.location.href='/logout'">Cerrar sesion</button>
+        {% endif %}
+        </div>
     </div>
   <div class="container">
     {% for producto in productos %}
     <div class="product">
-      <img src="product1.jpg" alt="Pedido 1">
       <h2>{{ producto.nombre }}</h2>
       <p>{{ producto.descripcion }}</p>
       <p class="price">${{ producto.precio }}</p>
-      <button type="submit" onclick="window.location.href='/direccion-envio/{{ producto.idProducto }}'">Comprar</button>
+      {% if session['usuario']%}
+        <button type="submit" onclick="window.location.href='/direccion-envio/{{ producto.idProducto }}'">Comprar</button>
+      {% endif %}
     </div>
     {% endfor %}
-    <!-- Add more product elements as needed -->
   </div>
   <div class="footer">
     &copy; 2023 Micheladas a tu casa. Todos los derechos reservados.

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Micheladas a tu casa</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .header {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1 {
+      margin: 0;
+    }
+    .product {
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .product img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 10px;
+    }
+    .product h2 {
+      margin-top: 0;
+    }
+    .product p {
+      margin-bottom: 10px;
+    }
+    .product .price {
+      font-weight: bold;
+    }
+    .footer {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .header-buttons button {
+      display: inline;
+      margin-left: 10px;
+      width: 10%
+    }
+  </style>
+</head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Micheladas a tu casa</h1>
+      <h2>Pedido {{ pedido.id_pedido }}</h2>
+      <div align="right" class="header-buttons">
+        <button onclick="window.location.href='/'">Vendedor</button>
+      </div>
+    </div>
+    <div class="descripcion-pedido">
+        <h3>Descripción</h3>
+      <p>Fecha: {{ pedido.fecha }}</p>
+      <p>Cantidad: {{ pedido.cantidad }}</p>
+      <p>Producto: {{ pedido.producto }}</p>
+    </div>
+    <div class="total-label">
+      Total: <span id="total">${{ pedido.total }}</span>
+    </div>
+    <div class="direccion-envio">
+        <h3>Datos de envío</h3>
+      <p>Comprador: {{ cliente.nombres }} {{ cliente.apellido_p }} {{ cliente.apellido_m }}</p>
+      <p>Calle: {{ cliente.dir_calle }}</p>
+      <p>Numero: {{ cliente.dir_num }}</p>
+      <p>CP: {{ cliente.dir_cp }}</p>
+      <p>Colonia: {{ cliente.dir_colonia }}</p>
+      <p>Ciudad: {{ cliente.dir_ciudad }}</p>
+      <p>Estado: {{ cliente.dir_estado }}</p>
+    </div>
+    <button onclick="window.location.href='/pedido/{{ pedido.id_pedido }}/exito'">Marcar como enviado.</button>
+  </div>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
