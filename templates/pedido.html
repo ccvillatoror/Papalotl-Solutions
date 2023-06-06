@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-<html>
-<head>
-  <title>Pedido</title>
+  <title>Micheladas a tu casa</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -13,38 +9,49 @@
       margin: 0;
       padding: 0;
     }
+    .header {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
     .container {
-      max-width: 800px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 20px;
-      background-color: #ffffff;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
-      text-align: center;
+      margin: 0;
     }
-    .product-image {
-      text-align: center;
+    .product {
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      padding: 20px;
+      margin-bottom: 20px;
+      overflow: hidden;
     }
-    .product-description {
-      margin-top: 20px;
+    .product img {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 4px;
+      margin-bottom: 10px;
     }
-    .buy-button {
-      text-align: center;
-      margin-top: 20px;
+    .product h2 {
+      margin-top: 0;
     }
-    .quantity-label {
-      display: inline-block;
-      margin-right: 10px;
+    .product p {
+      margin-bottom: 10px;
     }
-    .quantity-select {
-      width: 80px;
-    }
-    .total-label {
+    .product .price {
       font-weight: bold;
-      margin-top: 10px;
+    }
+    .footer {
+      background-color: #333333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
     }
     button {
       display: block;
@@ -57,13 +64,34 @@
       border-radius: 4px;
       cursor: pointer;
     }
+    .header-buttons button {
+      display: inline;
+      margin-left: 10px;
+      width: 10%
+    }
   </style>
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <body>
   <div class="container">
-    <h2>Pedido {{ pedido.id_pedido }}</h2>
+    <div class="header">
+      <h1>Micheladas a tu casa</h1>
+      <h2>Pedido {{ pedido.id_pedido }}</h2>
+      <div align="right" class="header-buttons">
+        <button onclick="window.location.href='/'">Vendedor</button>
+      </div>
+    </div>
     <div class="descripcion-pedido">
-        <h4>Descripción</h4>
+        <h3>Descripción</h3>
+      <p>Fecha: {{ pedido.fecha }}</p>
       <p>Cantidad: {{ cantidad }}</p>
       <p>Producto: {{ producto.nombre }}</p>
       <p>{{ producto.descripcion }}<p>
@@ -72,7 +100,7 @@
       Total: <span id="total">${{ pedido.total }}</span>
     </div>
     <div class="direccion-envio">
-        <h4>Datos de envío</h4>
+        <h3>Datos de envío</h3>
       <p>Comprador: {{ cliente.nombres }} {{ cliente.apellido_p }} {{ cliente.apellido_m }}</p>
       <p>Calle: {{ cliente.dir_calle }}</p>
       <p>Numero: {{ cliente.dir_num }}</p>
