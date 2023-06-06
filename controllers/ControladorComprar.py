@@ -7,11 +7,11 @@ from models.model_usuario import obtener_usuario
 from models.modelo_producto import obtener_producto
 from models.model_conforma import registrar_conforma
 from models.model_ordena import registrar_ordena
-from models.ModeloPedido import registrar_pedido, obtener_pedido_fecha
+from models.ModeloPedido import registrar_pedido, obtener_pedido_fecha, obten_pedido
 
 
 comprar_producto_blueprint = Blueprint('comprar_producto', __name__, url_prefix='/comprar-producto')
-@comprar_producto_blueprint.route('/comprar-producto/<int:idProducto>', methods=['GET', 'POST'])
+@comprar_producto_blueprint.route('/', methods=['GET', 'POST'])
 def comprar_producto(idProducto):
     if 'usuario' in session:
         correo = session['usuario']
@@ -19,14 +19,15 @@ def comprar_producto(idProducto):
         producto = obtener_producto(idProducto)
         inventario = [i+1 for i in range(producto.cant_inventario)]
 
-        if request.method == 'GET':
+        if request.method == 'POST':
             # Request.form
             precio = producto.precio
-            cantidad = request.args.get('cantidad')
+            cantidad = request.form['cantidad']
             total = float(cantidad) * precio
             # Obtener id_producto
             # Guardar total y cantidad
             # Crear Pedido
+
 
             session['pedido'] = Pedido(total, 1, 0)
             session['cantidad'] = cantidad
@@ -47,14 +48,13 @@ pago_blueprint = Blueprint('pago', __name__, url_prefix="/pago")
 def pago():
     if 'pedido' in session and 'usuario' in session:
         usuario = obtener_usuario(session['usuario'])
-        pedido = session['pedido']
+        pedido_id = session['pedido']
         producto = session['producto']
         cantidad = session['cantidad']
         if request.method == 'POST':
-            registrar_pedido(pedido)
-            pedido = obtener_pedido_fecha(pedido.fecha)
-            compra = [Conforma(pedido.id_pedido, producto.idProducto, cantidad),
-                      Ordena(usuario.id_usuario, pedido.id_pedido)]
+
+            compra = [Conforma(pedido_id, producto, cantidad),
+                      Ordena(usuario.id_usuario, pedido_id)]
             registrar_conforma(compra[0])
             registrar_ordena(compra[1])
 
