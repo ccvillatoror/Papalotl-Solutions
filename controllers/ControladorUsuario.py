@@ -1,7 +1,9 @@
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from datetime import datetime
 from alchemyClasses.Usuario import Usuario
+from alchemyClasses.Pedido import Pedido
 from models.model_usuario import obtener_usuario, registrar_usuario, actualizar_direccion_envio
+from models.modelo_producto import obtener_producto
 
 '''
 Este controlador maneja toda la lógica de los casos de uso
@@ -35,11 +37,12 @@ def registro_cliente():
 
 
 direccion_envio_blueprint = Blueprint('direccion_envio', __name__, url_prefix="/direccion-envio")
-@direccion_envio_blueprint.route('/', methods=['GET', 'POST'])
-def direccion_envio():
+@direccion_envio_blueprint.route('/direccion-envio/<int:idProducto>', methods=['GET', 'POST'])
+def direccion_envio(idProducto):
     if 'usuario' in session:
         correo = session['usuario']
         usuario = obtener_usuario(correo)
+        producto = obtener_producto(idProducto)
 
         if request.method == 'POST':
             calle = request.form['calle']
@@ -52,6 +55,13 @@ def direccion_envio():
 
             actualizar_direccion_envio(usuario, calle, num, cp, colonia, ciudad, estado)
             flash("La dirección se ha guardado.")
+
+            precio = producto.precio
+            session['pedido'] = Pedido(precio, 1, 0)
+            session['cantidad'] = 1
+            session['fecha_pedido'] = session['pedido'].fecha
+            session['producto'] = producto
+
             return redirect(url_for("pago"))
         else:
             calle = usuario.dir_calle

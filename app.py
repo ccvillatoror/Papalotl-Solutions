@@ -93,14 +93,17 @@ def registro_cliente():
 
 @app.route("/comprar-producto/<int:idProducto>", methods=["GET","POST"])
 def producto(idProducto):
-    return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
-
-@app.route("/direccion-envio", methods=["GET", "POST"])
-def dirección():
-    if request.method == "POST":
-        return redirect(url_for("direccion_envio.direccion_envio"))
+    if request.method == 'POST':
+        return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
     else:
-        return render_template("direccion_envío.html")
+        return redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
+
+@app.route("/direccion-envio/<int:idProducto>", methods=["GET", "POST"])
+def dirección(idProducto):
+    if request.method == "POST":
+        return redirect(url_for("direccion_envio.direccion_envio", idProducto=idProducto))
+    else:
+        return render_template("direccion_envío.html", idProducto=idProducto)
 
 @app.route("/pago", methods=["GET", "POST"])
 def pago():
