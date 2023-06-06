@@ -91,7 +91,7 @@ def registro_cliente():
     else:
         return render_template("registro_cliente.html")
 
-@app.route("/comprar_producto/<int:idProducto>", methods=["GET","POST"])
+@app.route("/comprar-producto/<int:idProducto>", methods=["GET","POST"])
 def producto(idProducto):
     if request.method == "POST":
         return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))

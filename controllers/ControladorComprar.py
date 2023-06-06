@@ -7,7 +7,7 @@ from models.model_usuario import obtener_usuario
 from models.modelo_producto import obtener_producto
 
 comprar_producto_blueprint = Blueprint('comprar_producto', __name__, url_prefix='/comprar-producto')
-@comprar_producto_blueprint.route('/comprar_producto/<int:idProducto>', methods=['GET', 'POST'])
+@comprar_producto_blueprint.route('/comprar-producto/<int:idProducto>', methods=['GET', 'POST'])
 def comprar_producto(idProducto):
     if 'usuario' in session:
         correo = session['usuario']
