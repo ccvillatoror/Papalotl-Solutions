@@ -19,11 +19,11 @@ def comprar_producto(idProducto):
         producto = obtener_producto(idProducto)
         inventario = [i+1 for i in range(producto.cant_inventario)]
 
-        if request.method == 'POST' or request.method == 'GET':
+        if request.method == 'GET':
             # Request.form
             precio = producto.precio
-            cantidad = request.form['cantidad']
-            total = cantidad * precio
+            cantidad = request.args.get('cantidad')
+            total = float(cantidad) * precio
             # Obtener id_producto
             # Guardar total y cantidad
             # Crear Pedido
@@ -34,6 +34,9 @@ def comprar_producto(idProducto):
             session['producto'] = producto
             print(session['pedido'])
 
+            if producto in session:
+                return render_template('comprar_producto.html', producto=producto, inventario=inventario)
+        else:
             return render_template('comprar_producto.html', producto=producto, inventario=inventario)
     else:
         flash("Inicia sesión antes de comprar.")
