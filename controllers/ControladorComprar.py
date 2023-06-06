@@ -10,11 +10,11 @@ from models.model_ordena import registrar_ordena
 
 comprar_producto_blueprint = Blueprint('comprar_producto', __name__, url_prefix='/comprar-producto')
 @comprar_producto_blueprint.route('/', methods=['GET', 'POST'])
-def comprar_producto(idProducto):
+def comprar_producto(id_producto):
     if 'usuario' in session:
         correo = session['usuario']
         usuario = obtener_usuario(correo)
-        producto = obtener_producto(idProducto)
+        producto = obtener_producto(id_producto)
         inventario = [i+1 for i in range(producto.cant_inventario)]
 
         if request.method == 'POST':

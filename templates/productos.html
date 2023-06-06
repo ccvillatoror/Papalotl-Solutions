@@ -30,8 +30,8 @@
         </thead>
         <tbody>
             {% for producto in productos %}
-            <tr  onclick="window.location.href='/producto/{{producto.idProducto}}'">
-                <td>{{ producto.idProducto }}</td>
+            <tr  onclick="window.location.href='/producto/{{producto.id_producto}}'">
+                <td>{{ producto.id_producto }}</td>
                 <td>{{ producto.nombre }}</td>
                 <td>{{ producto.descripcion }}</td>
                 <td>{{ producto.precio }}</td>

@@ -29,8 +29,8 @@
                 <p class="product-description"><strong>Descripción:</strong>{{ producto.descripcion }}</p>
                 <p class="product-price"><strong>Cantidad en Inventario:</strong> {{ producto.cant_inventario }}</p>
                 {% if session['tipo_usuario'] == 'Administrador' %}
-                    <a class="product-button" href="../editarProducto/{{ producto.idProducto }}">Editar</a>
-                    <a class="product-button" href="../eliminarProducto/{{ producto.idProducto }}">Eliminar</a>
+                    <a class="product-button" href="../editarProducto/{{ producto.id_producto }}">Editar</a>
+                    <a class="product-button" href="../eliminarProducto/{{ producto.id_producto }}">Eliminar</a>
                 {% endif %}
             </div>
         </div>
