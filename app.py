@@ -93,10 +93,7 @@ def registro_cliente():
 
 @app.route("/comprar-producto/<int:idProducto>", methods=["GET","POST"])
 def producto(idProducto):
-    if request.method == "POST":
-        return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
-    else:
-        return redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
+    return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
 
 @app.route("/direccion-envio", methods=["GET", "POST"])
 def dirección():

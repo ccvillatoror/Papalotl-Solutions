@@ -7,7 +7,7 @@ from models.model_usuario import obtener_usuario
 from models.modelo_producto import obtener_producto
 from models.model_conforma import registrar_conforma
 from models.model_ordena import registrar_ordena
-from models.ModeloPedido import registrar_pedido
+from models.ModeloPedido import registrar_pedido, obtener_pedido_fecha
 
 
 comprar_producto_blueprint = Blueprint('comprar_producto', __name__, url_prefix='/comprar-producto')
@@ -19,7 +19,7 @@ def comprar_producto(idProducto):
         producto = obtener_producto(idProducto)
         inventario = [i+1 for i in range(producto.cant_inventario)]
 
-        if request.method == 'POST':
+        if request.method == 'POST' or request.method == 'GET':
             # Request.form
             precio = producto.precio
             cantidad = request.form['cantidad']
@@ -34,8 +34,6 @@ def comprar_producto(idProducto):
             session['producto'] = producto
             print(session['pedido'])
 
-            return redirect(url_for("direccion-envio"))
-        else:
             return render_template('comprar_producto.html', producto=producto, inventario=inventario)
     else:
         flash("Inicia sesión antes de comprar.")
@@ -50,12 +48,12 @@ def pago():
         producto = session['producto']
         cantidad = session['cantidad']
         if request.method == 'POST':
+            registrar_pedido(pedido)
+            pedido = obtener_pedido_fecha(pedido.fecha)
             compra = [Conforma(pedido.id_pedido, producto.idProducto, cantidad),
                       Ordena(usuario.id_usuario, pedido.id_pedido)]
             registrar_conforma(compra[0])
             registrar_ordena(compra[1])
-            registrar_pedido(pedido)
-
 
             flash("Pago exitoso.")
             flash("La compra ha sido registrada.")
