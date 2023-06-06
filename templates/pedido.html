@@ -92,9 +92,8 @@
     <div class="descripcion-pedido">
         <h3>Descripción</h3>
       <p>Fecha: {{ pedido.fecha }}</p>
-      <p>Cantidad: {{ cantidad }}</p>
-      <p>Producto: {{ producto.nombre }}</p>
-      <p>{{ producto.descripcion }}<p>
+      <p>Cantidad: {{ pedido.cantidad }}</p>
+      <p>Producto: {{ pedido.producto }}</p>
     </div>
     <div class="total-label">
       Total: <span id="total">${{ pedido.total }}</span>

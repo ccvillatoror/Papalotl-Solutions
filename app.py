@@ -6,17 +6,14 @@ from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
 from alchemyClasses.Conforma import Conforma
 from alchemyClasses.Ordena import Ordena
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
-from controllers.ControladorUsuario import registro_cliente_blueprint
-from models.ModeloPedido import obtener_info
+from models.ModeloPedido import info_basica
 from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint, pago_blueprint
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
 
 DATABASE_NAME = "micheladasatucasa"
-DATABASE_USERNAME = "natalia"
-DATABASE_PASSWORD = "ati_desa15"
+DATABASE_USERNAME = "root"
+DATABASE_PASSWORD = "root"
 DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
@@ -113,18 +110,14 @@ def mostrar_pedidos():
     pedidos = Pedido.query.filter(Pedido.estatus).all()
     get_id = lambda x : x.id_pedido
     id_pedidos = list(map(get_id, pedidos))
-    pedidos = list(map(obtener_info, id_pedidos))
+    pedidos = list(map(info_basica, id_pedidos))
     return render_template('pedidos.html', pedidos=pedidos)
 
 @app.route('/pedido/<int:id_pedido>')
 def mostrar_pedido(id_pedido):
-    pedido = Pedido.query.filter(Pedido.id_pedido == id_pedido).first()
-    idProducto = Conforma.query.filter(Conforma.id_pedido == id_pedido).first().id_producto
-    cantidad = Conforma.query.filter(Conforma.id_pedido == id_pedido).first().cantidad
-    producto = Producto.query.filter(Producto.idProducto == idProducto).first()
-    id_cliente = Ordena.query.filter(Ordena.id_pedido == id_pedido).first().id_usuario
-    cliente = Usuario.query.filter(Usuario.id_usuario == id_cliente).first()
-    return render_template('pedido.html', pedido=pedido, producto=producto, cliente=cliente, cantidad=cantidad)
+    pedido = info_basica(id_pedido)
+    cliente = Usuario.query.filter(Usuario.id_usuario == pedido["id_cliente"]).first()
+    return render_template('pedido.html', pedido=pedido, cliente=cliente)
 
 #run app
 if __name__ == '__main__':
