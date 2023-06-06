@@ -40,21 +40,19 @@ def direccion_envio():
     if 'usuario' in session:
         correo = session['usuario']
         usuario = obtener_usuario(correo)
-        if request.method == 'POST':
 
+        if request.method == 'POST':
             calle = request.form['calle']
+            session['calle'] = calle
             num = request.form['num']
             cp = request.form['cp']
             colonia = request.form['colonia']
             ciudad = request.form['ciudad']
             estado = request.form['estado']
-            dirección = [calle, num, cp, colonia, ciudad, estado]
 
             actualizar_direccion_envio(usuario, calle, num, cp, colonia, ciudad, estado)
-
-            # TODO: Recuperar Dirección si hay
-            # TODO: Actualizar los datos (?)
-            return dirección
+            flash("La dirección se ha guardado.")
+            return redirect(url_for("pago"))
         else:
             calle = usuario.dir_calle
             num = usuario.dir_num
@@ -62,7 +60,8 @@ def direccion_envio():
             colonia = usuario.dir_colonia
             ciudad = usuario.dir_ciudad
             estado = usuario.dir_estado
-            return render_template('direccion_envío.html')
+            return render_template('direccion_envío.html', calle=calle, num=num,
+                                   cp=cp, colonia=colonia, ciudad=ciudad, estado=estado)
 
     else:
         flash("Inicia sesión antes de comprar.")
