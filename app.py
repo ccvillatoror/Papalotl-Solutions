@@ -91,12 +91,12 @@ def registro_cliente():
     else:
         return render_template("registro_cliente.html")
 
-@app.route("/producto", methods=["GET","POST"])
-def producto():
+@app.route("/comprar_producto/<int:idProducto>", methods=["GET","POST"])
+def producto(idProducto):
     if request.method == "POST":
-        return  redirect(url_for('comprar_producto.comprar_producto'))
+        return  redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
     else:
-        return render_template("comprar_producto.html")
+        return redirect(url_for('comprar_producto.comprar_producto', idProducto=idProducto))
 
 @app.route("/direccion-envio", methods=["GET", "POST"])
 def dirección():

@@ -22,7 +22,7 @@
       <h2>{{ producto.nombre }}</h2>
       <p>{{ producto.descripcion }}</p>
       <p class="price">${{ producto.precio }}</p>
-      <button>Comprar</button>
+      <button onclick="window.location.href='/comprar_producto/{{ producto.idProducto }}'">Comprar</button>
     </div>
     {% endfor %}
     <!-- Add more product elements as needed -->
