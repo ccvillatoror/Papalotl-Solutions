@@ -19,21 +19,25 @@
     <div class="header">
       <h1>Micheladas a tu casa</h1>
       <div align="right" class="header-buttons">
-        <button onclick="window.location.href='/login'">Ingresar</button>
-        <button onclick="window.location.href='/registro-cliente'">Registrarme</button>
-      </div>
+        {% if not session['usuario']%}
+          <button onclick="window.location.href='/login'">Ingresar</button>
+          <button onclick="window.location.href='/registro-cliente'">Registrarme</button>
+        {% else %}
+          <button onclick="window.location.href='/logout'">Cerrar sesion</button>
+        {% endif %}
+        </div>
     </div>
   <div class="container">
     {% for producto in productos %}
     <div class="product">
-      <img src="product1.jpg" alt="Producto#">
       <h2>{{ producto.nombre }}</h2>
       <p>{{ producto.descripcion }}</p>
       <p class="price">${{ producto.precio }}</p>
-      <button>Comprar</button>
+      {% if session['usuario']%}
+        <button>Comprar</button>
+      {% endif %}
     </div>
     {% endfor %}
-    <!-- Add more product elements as needed -->
   </div>
   <div class="footer">
     &copy; 2023 Micheladas a tu casa. Todos los derechos reservados.

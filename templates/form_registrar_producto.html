@@ -8,9 +8,12 @@
 <body>
     <div class="header">
         <h1>Registrar producto</h1>
+{% if session['usuario']%}
         <nav class="navbar">
             <ul>
-                <li><a href="../registrarProducto">Agregar producto</a></li>
+                {% if session['tipo_usuario'] == 'Administrador' %}
+                    <li><a href="../registrarProducto">Agregar producto</a></li>
+                {% endif %}
                 <li><a href="../productos">Consultar productos</a></li>
                 <li><a href="../logout">Cerrar sesion</a></li>
             </ul>
@@ -43,5 +46,9 @@
             </div>
         </form>
     </div>
+{% else %}
+    <h1>Debe iniciar sesion para ver esta pagina</h1>
+    <button onclick="window.location.href='./login'" class="button-login">Iniciar sesion</button>
+{% endif %}
 </body>
 </html>

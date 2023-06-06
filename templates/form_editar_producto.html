@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Editar producto</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-product-form.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
 </head>
+
 <body>
     <div class="header">
         <h1>Editar producto</h1>
+    {% if session['usuario']%}
         <nav class="navbar">
             <ul>
-                <li><a href="../registrarProducto">Agregar producto</a></li>
+                {% if session['tipo_usuario'] == 'Administrador' %}
+                    <li><a href="../registrarProducto">Agregar producto</a></li>
+                {% endif %}
                 <li><a href="../productos">Consultar productos</a></li>
                 <li><a href="../logout">Cerrar sesion</a></li>
             </ul>
@@ -18,7 +23,7 @@
     </div>
     <div class="container">
         <form class="product-form" action="/editarProducto/{{ producto.idProducto }}" method="GET">
-            
+
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required value="{{producto.nombre}}">
@@ -35,12 +40,18 @@
             </div>
             <div class="form-group">
                 <label for="cant_inventario">Cantidad inventario:</label>
-                <input type="number" id="cant_inventario" name="cant_inventario" step="1" value="{{ producto.cant_inventario }}" required>
+                <input type="number" id="cant_inventario" name="cant_inventario" step="1"
+                    value="{{ producto.cant_inventario }}" required>
             </div>
             <div class="form-group">
                 <input type="submit" value="Actualizar">
             </div>
         </form>
     </div>
+{% else %}
+    <h1>Debe iniciar sesion para ver esta pagina</h1>
+    <button onclick="window.location.href='./login'" class="button-login">Iniciar sesion</button>
+{% endif %}
 </body>
+
 </html>

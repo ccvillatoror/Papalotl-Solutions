@@ -35,51 +35,6 @@ def create_app():
 
 create_app()
 
-#routes
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-#create new product
-@app.route('/products/create', methods=['GET', 'POST'])
-def create_product():
-    if request.method == 'POST':
-        name = request.form['name']
-        price = float(request.form['price'])
-        description = request.form['description']
-        amount_available = int(request.form['amount_available'])
-
-        product = Product(name=name, price=price, description=description, amount_available=amount_available)
-        db.session.add(product)
-        db.session.commit()
-
-        return redirect(url_for('index'))
-    return render_template('create_product.html')
-
-#list products
-@app.route('/products')
-def list_products():
-    search_query = request.args.get('search', '')
-    if search_query:
-       products = Product.query.filter(Product.name.ilike(f'%{search_query}%')).all()
-    else:
-       products = Product.query.all()
-    return render_template('list_products.html', products=products)
-
-#eliminate product
-@app.route('/products/eliminate/<int:product_id>', methods=['POST'])
-def eliminate_product(product_id):
-   product = Product.query.get_or_404(product_id)
-   db.session.delete(product)
-   db.session.commit()
-   return redirect(url_for('list_products'))
-with app.app_context():
-    try:
-        db.session.execute(text('SELECT 1'))
-        print('\n\n----------- Connection successful ! -----------')
-    except Exception as e:
-        print('\n\n----------- Connection failed ! ERROR : ', e)
-
 # ---------------------------
 @app.route('/editarProducto/<int:idProducto>', methods=['GET'])
 def editar_producto(idProducto):

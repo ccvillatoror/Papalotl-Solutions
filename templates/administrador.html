@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Administrador de Productos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-admin.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            {% if session['tipo_usuario'] == 'Administrador' %}
+                <li><a href="./">Consultar itinerario de insumos</a></li>
+                <li><a href="./">Consultar reportes de venta</a></li>
+                <li><a href="./">Agregar, actualizar, eliminar vendedores</a></li>
+                <li><a href="../registrarProducto">Agregar productos</a></li>
+                <li><a href="../productos">Consultar productos</a></li>
+            {% endif %}
+            <li><a href="./logout">Cerrar sesion</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
