@@ -3,10 +3,10 @@ from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
-from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint, pago_blueprint
+from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
-from controllers.ControladorComprar import comprar_producto_blueprint
+from controllers.ControladorComprar import comprar_producto_blueprint, pago_blueprint
 
 
 DATABASE_NAME = "micheladasatucasa"

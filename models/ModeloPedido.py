@@ -11,3 +11,11 @@ def crear_pedido(total, estatus):
 
 def atender(id_pedido):
     Pedido.query.filter(Pedido.id_pedido == id_pedido).update({'estatus': 0})
+
+def obten_pedido_fecha(fecha):
+    ans = Pedido.query.filter(Pedido.fecha == fecha).first()
+    return ans
+
+def registrar_pedido(pedido):
+    db.session.add(pedido)
+    db.session.commit()

@@ -68,18 +68,3 @@ def direccion_envio():
         return redirect(url_for("login"))
 
 
-pago_blueprint = Blueprint('pago', __name__, url_prefix="/pago")
-@pago_blueprint.route('/', methods=['GET', 'POST'])
-def pago():
-    if 'compra' in session:
-        if request.method == 'POST':
-            print('POST gege')
-            flash("Pago exitoso.")
-            flash("La compra ha sido registrada.")
-            # TODO: Crear la transacción
-            return redirect(url_for('home'))
-        else:
-            print('GET jeje')
-            return render_template('pago.html')
-    else:
-        flash("No hay ningún artículo seleccionado")
