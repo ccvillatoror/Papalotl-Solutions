@@ -109,10 +109,8 @@ def dirección(id_producto):
 # ---------------------------
 @app.route("/pago", methods=["GET", "POST"])
 def pago():
-    if request.method == 'POST':
-        return redirect(url_for("pago.pago"))
-    else:
-        return render_template("pago.html")
+    return redirect(url_for("pago.pago"))
+
 
 # ---------------------------
 @app.route('/pedidos')
