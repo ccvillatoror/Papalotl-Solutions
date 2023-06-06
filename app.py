@@ -12,8 +12,8 @@ from controllers.ControladorUsuario import registro_cliente_blueprint, direccion
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
 DATABASE_NAME = "micheladasatucasa"
-DATABASE_USERNAME = "natalia"
-DATABASE_PASSWORD = "ati_desa15"
+DATABASE_USERNAME = "root"
+DATABASE_PASSWORD = "root"
 DATABASE_HOST = "localhost:3306"
 
 app = Flask(__name__)
@@ -132,9 +132,9 @@ def mostrar_pedidos():
 @app.route('/pedido/<int:id_pedido>')
 def mostrar_pedido(id_pedido):
     pedido = Pedido.query.filter(Pedido.id_pedido == id_pedido).first()
-    id_producto = Conforma.query.filter(Conforma.id_pedido == id_pedido).first().id_producto
+    idProducto = Conforma.query.filter(Conforma.id_pedido == id_pedido).first().id_producto
     cantidad = Conforma.query.filter(Conforma.id_pedido == id_pedido).first().cantidad
-    producto = Producto.query.filter(Producto.id_producto == id_producto).first()
+    producto = Producto.query.filter(Producto.idProducto == idProducto).first()
     id_cliente = Ordena.query.filter(Ordena.id_pedido == id_pedido).first().id_usuario
     cliente = Usuario.query.filter(Usuario.id_usuario == id_cliente).first()
     return render_template('pedido.html', pedido=pedido, producto=producto, cliente=cliente, cantidad=cantidad)
