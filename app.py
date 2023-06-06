@@ -79,6 +79,9 @@ def logout():
 @app.route("/administrador")
 def administrador():
     return render_template("administrador.html")
+@app.route("/vendedor")
+def vendedor():
+    return render_template("vendedor.html")
 # ---------------------------
 @app.route("/registro-cliente", methods=["GET","POST"])
 def registro_cliente():

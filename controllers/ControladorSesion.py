@@ -17,7 +17,7 @@ def login_usuario():
                     if usuario.tipo_usuario == "Administrador":
                         return redirect(url_for("administrador"))
                     else: 
-                        return redirect(url_for("producto.productos"))
+                        return redirect(url_for("vendedor"))
                 else:
                         return redirect(url_for("home"))
             else:

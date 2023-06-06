@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vendedor</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-admin.css') }}">
+</head>
+
+<body>
+    {% if session['tipo_usuario'] == 'Vendedor' %}
+    <div class="header">
+        <h1>Vendedor</h1>
+    </div>
+    <div class="menu-container">
+        <ul class="menu">
+            <!--<li><a href="#">Actualizar contraseña</a></li>-->
+            <li><a href="#">Ver pedidos del cliente</a></li>
+            <li><a href="#">Atender pedidos</a></li>
+            <li><a href="#">Hacer inventario de insumos</a></li>
+            <li><a href="#">Reportar la venta</a></li>
+            {% endif %}
+            <li><a href="./logout" class="button-login">Cerrar sesion</a></li>
+        </ul>
+        </ul>
+    </div>
+</body>
+
+</html>
