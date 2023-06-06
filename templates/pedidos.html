@@ -14,10 +14,10 @@
   <div class="container">
     {% for pedido in pedidos %}
     <div class="product">
-      <h2>Pedido {{ pedido.idPedido }}</h2>
-      <p class="cantidad">5</p>
+      <h3>Pedido {{ pedido.id_pedido }}</h3>
+      <p class="cantidad">#</p>
       <p class="total">${{ pedido.total }}</p>
-      <button onclick="window.location.href='/producto'">Atender</button>
+      <button onclick="window.location.href='/pedido/{{ pedido.id_pedido }}'">Atender</button>
     </div>
     {% endfor %}
     <!-- Add more product elements as needed -->

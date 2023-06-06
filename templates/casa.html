@@ -5,6 +5,15 @@
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-casa.css') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/logo.ico') }}">
 </head>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
 <body>
   <div class="container">
     <div class="header">
@@ -17,7 +26,7 @@
   <div class="container">
     {% for producto in productos %}
     <div class="product">
-      <img src="product1.jpg" alt="Pedido 1">
+      <img src="product1.jpg" alt="Producto#">
       <h2>{{ producto.nombre }}</h2>
       <p>{{ producto.descripcion }}</p>
       <p class="price">${{ producto.precio }}</p>

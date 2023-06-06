@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+<html>
+<head>
+  <title>Pedido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #ffffff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    .product-image {
+      text-align: center;
+    }
+    .product-description {
+      margin-top: 20px;
+    }
+    .buy-button {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .quantity-label {
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .quantity-select {
+      width: 80px;
+    }
+    .total-label {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Pedido {{ pedido.id_pedido }}</h2>
+    <div class="descripcion-pedido">
+        <h4>Descripción</h4>
+      <p>Cantidad: {{ cantidad }}</p>
+      <p>Producto: {{ producto.nombre }}</p>
+      <p>{{ producto.descripcion }}<p>
+    </div>
+    <div class="total-label">
+      Total: <span id="total">${{ pedido.total }}</span>
+    </div>
+    <div class="direccion-envio">
+        <h4>Datos de envío</h4>
+      <p>Comprador: {{ cliente.nombres }} {{ cliente.apellido_p }} {{ cliente.apellido_m }}</p>
+      <p>Calle: {{ cliente.dir_calle }}</p>
+      <p>Numero: {{ cliente.dir_num }}</p>
+      <p>CP: {{ cliente.dir_cp }}</p>
+      <p>Colonia: {{ cliente.dir_colonia }}</p>
+      <p>Ciudad: {{ cliente.dir_ciudad }}</p>
+      <p>Estado: {{ cliente.dir_estado }}</p>
+    </div>
+    <button onclick="window.location.href='/pedidos'">Marcar como enviado</button>
+  </div>
+</body>
+</html></title>
+</head>
+<body>
+
+</body>
+</html>
