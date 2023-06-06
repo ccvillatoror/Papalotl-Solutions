@@ -19,3 +19,4 @@ def obtener_pedido_fecha(fecha):
 def registrar_pedido(pedido):
     db.session.add(pedido)
     db.session.commit()
+    return obtener_pedido_fecha(pedido.fecha)

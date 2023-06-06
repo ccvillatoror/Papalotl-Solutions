@@ -4,6 +4,7 @@ from alchemyClasses.Usuario import Usuario
 from alchemyClasses.Pedido import Pedido
 from models.model_usuario import obtener_usuario, registrar_usuario, actualizar_direccion_envio
 from models.modelo_producto import obtener_producto
+from models.ModeloPedido import registrar_pedido, obtener_pedido_fecha
 
 '''
 Este controlador maneja toda la lógica de los casos de uso
@@ -57,9 +58,12 @@ def direccion_envio(idProducto):
             flash("La dirección se ha guardado.")
 
             precio = producto.precio
-            session['pedido'] = Pedido(precio, 1, 0)
+            pedido = registrar_pedido(Pedido(precio, 1, 0))
+
+
+            session['pedido'] = pedido.id_pedido
             session['cantidad'] = 1
-            session['fecha_pedido'] = session['pedido'].fecha
+            session['fecha_pedido'] = pedido.fecha
             session['producto'] = producto
 
             return redirect(url_for("pago"))
