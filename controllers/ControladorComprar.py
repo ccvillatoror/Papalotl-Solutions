@@ -2,12 +2,10 @@ from flask import Blueprint, flash, g, redirect, render_template, request, sessi
 from alchemyClasses.Ordena import Ordena
 from alchemyClasses.Conforma import Conforma
 from alchemyClasses.Pedido import Pedido
-from alchemyClasses.Producto import Producto
 from models.model_usuario import obtener_usuario
 from models.modelo_producto import obtener_producto
 from models.model_conforma import registrar_conforma
 from models.model_ordena import registrar_ordena
-from models.ModeloPedido import registrar_pedido, obtener_pedido_fecha, obten_pedido
 
 
 comprar_producto_blueprint = Blueprint('comprar_producto', __name__, url_prefix='/comprar-producto')
