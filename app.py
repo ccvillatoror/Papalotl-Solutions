@@ -1,7 +1,12 @@
 from flask import Flask, render_template, url_for, redirect, request, Blueprint, jsonify
+
+from alchemyClasses.Pedido import Pedido
+from alchemyClasses.Usuario import Usuario
 from controllers.login import loginBlueprint
 from alchemyClasses.__init__ import db
 from alchemyClasses.Producto import Producto
+from alchemyClasses.Conforma import Conforma
+from alchemyClasses.Ordena import Ordena
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from controllers.ControladorUsuario import registro_cliente_blueprint
@@ -147,6 +152,20 @@ def user(usr):
 
     return f"<h1>{usr}</h1>"
 
+@app.route('/pedidos')
+def mostrar_pedidos():
+    pedidos = Pedido.query.filter(Pedido.estatus).all()
+    return render_template('pedidos.html', pedidos=pedidos)
+
+@app.route('/pedido/<int:id_pedido>')
+def mostrar_pedido(id_pedido):
+    pedido = Pedido.query.filter(Pedido.id_pedido == id_pedido).first()
+    id_producto = Conforma.query.filter(Conforma.id_pedido == id_pedido).first().id_producto
+    cantidad = Conforma.query.filter(Conforma.id_pedido == id_pedido).first().cantidad
+    producto = Producto.query.filter(Producto.id_producto == id_producto).first()
+    id_cliente = Ordena.query.filter(Ordena.id_pedido == id_pedido).first().id_usuario
+    cliente = Usuario.query.filter(Usuario.id_usuario == id_cliente).first()
+    return render_template('pedido.html', pedido=pedido, producto=producto, cliente=cliente, cantidad=cantidad)
 
 if __name__ == '__main__':
      app.run(port=5000, debug=True)
