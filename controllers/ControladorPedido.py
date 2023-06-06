@@ -1,21 +1,28 @@
 from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 
 from alchemyClasses.Pedido import Pedido
+from alchemyClasses.Usuario import Usuario
+from models.ModeloPedido import info_basica, atender
 
 pedidos_blueprint = Blueprint('pedidos', __name__, url_prefix="/pedidos")
 
-@pedidos_blueprint.route('/pedidos', methods=['GET', 'POST'])
+@pedidos_blueprint.route('/', methods=['GET'])
 def mostrar_pedidos():
-    if request.method == 'POST':
-        pass
-    else:
-        pedidos = Pedido.query.filter().all()
-        return render_template("pedidos.html", pedidos=pedidos)
+    pedidos = Pedido.query.filter(Pedido.estatus).all()
+    get_id = lambda x: x.id_pedido
+    id_pedidos = list(map(get_id, pedidos))
+    pedidos = list(map(info_basica, id_pedidos))
+    return render_template('pedidos.html', pedidos=pedidos)
 
-@pedidos_blueprint.route('/pedido/<int:id_pedido>', methods=['GET', 'POST'])
+@pedidos_blueprint.route('/pedido/<int:id_pedido>', methods=['GET'])
 def mostrar_pedido(id_pedido):
-    if request.method == 'POST':
-        return redirect(url_for("pedidos_blueprint.mostrar_pedidos"))
-    else:
-        pedido = Pedido.query.filter(Pedido.id_pedido == id_pedido).first()
-        return render_template("pedidos.html", pedido=pedido)
+    pedido = info_basica(id_pedido)
+    cliente = Usuario.query.filter(
+        Usuario.id_usuario == pedido["id_cliente"]).first()
+    return render_template('pedido.html', pedido=pedido, cliente=cliente)
+
+@pedidos_blueprint.route('/pedido/<int:id_pedido>/exito', methods=['GET'])
+def estatus_actualizado(id_pedido):
+    atender(id_pedido)
+    print("Aquí se actualiza el pedido:", id_pedido)
+    return render_template('estatus_actualizado.html', id_pedido=id_pedido)

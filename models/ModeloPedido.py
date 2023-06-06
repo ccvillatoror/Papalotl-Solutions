@@ -35,3 +35,5 @@ def info_basica(id_pedido):
 
 def atender(id_pedido):
     Pedido.query.filter(Pedido.id_pedido == id_pedido).update({'estatus': 0})
+    db.session.commit()
+    print("Commit hecho")

@@ -84,36 +84,16 @@
   <div class="container">
     <div class="header">
       <h1>Micheladas a tu casa</h1>
-      <h2>Pedido {{ pedido.id_pedido }}</h2>
+      <h2>Pedido {{ id_pedido }}</h2>
       <div align="right" class="header-buttons">
         <button onclick="window.location.href='/'">Vendedor</button>
       </div>
     </div>
-    <div class="descripcion-pedido">
-        <h3>Descripción</h3>
-      <p>Fecha: {{ pedido.fecha }}</p>
-      <p>Cantidad: {{ pedido.cantidad }}</p>
-      <p>Producto: {{ pedido.producto }}</p>
+    <div class="anuncio">
+        <h3>Pedido actualizado con exito</h3>
+      <p>El pedido ha sido registrado como enviado exitosamente</p>
     </div>
-    <div class="total-label">
-      Total: <span id="total">${{ pedido.total }}</span>
-    </div>
-    <div class="direccion-envio">
-        <h3>Datos de envío</h3>
-      <p>Comprador: {{ cliente.nombres }} {{ cliente.apellido_p }} {{ cliente.apellido_m }}</p>
-      <p>Calle: {{ cliente.dir_calle }}</p>
-      <p>Numero: {{ cliente.dir_num }}</p>
-      <p>CP: {{ cliente.dir_cp }}</p>
-      <p>Colonia: {{ cliente.dir_colonia }}</p>
-      <p>Ciudad: {{ cliente.dir_ciudad }}</p>
-      <p>Estado: {{ cliente.dir_estado }}</p>
-    </div>
-    <button onclick="window.location.href='/pedido/{{ pedido.id_pedido }}/exito'">Marcar como enviado.</button>
+    <button onclick="window.location.href='/pedidos'">Ok! Volver a los pedidos.</button>
   </div>
-</body>
-</html></title>
-</head>
-<body>
-
 </body>
 </html>
