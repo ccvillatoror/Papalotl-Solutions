@@ -6,6 +6,7 @@ from sqlalchemy import text
 from controllers.ControladorUsuario import registro_cliente_blueprint, direccion_envio_blueprint, pago_blueprint
 from controllers.ControladorProducto import productos_blueprint
 from controllers.ControladorSesion import login_usuario_blueprint, logout_usuario_blueprint
+from controllers.ControladorComprar import comprar_producto_blueprint
 
 
 DATABASE_NAME = "micheladasatucasa"
@@ -17,10 +18,10 @@ app = Flask(__name__)
 app.register_blueprint(registro_cliente_blueprint)
 app.register_blueprint(login_usuario_blueprint)
 app.register_blueprint(logout_usuario_blueprint)
-app.register_blueprint(loginBlueprint)
 app.register_blueprint(direccion_envio_blueprint)
 app.register_blueprint(pago_blueprint)
 app.register_blueprint(productos_blueprint)
+app.register_blueprint(comprar_producto_blueprint)
 
 app.config[
     'SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + DATABASE_USERNAME + ':' + DATABASE_PASSWORD + '@' + DATABASE_HOST + '/' + DATABASE_NAME
@@ -92,7 +93,10 @@ def registro_cliente():
 
 @app.route("/producto", methods=["GET","POST"])
 def producto():
-    return render_template("producto.html")
+    if request.method == "POST":
+        return  redirect(url_for('comprar_producto.comprar_producto'))
+    else:
+        return render_template("comprar_producto.html")
 
 @app.route("/direccion-envio", methods=["GET", "POST"])
 def dirección():
@@ -103,7 +107,10 @@ def dirección():
 
 @app.route("/pago", methods=["GET", "POST"])
 def pago():
-    return render_template("pago.html")
+    if request.method == 'POST':
+        return redirect(url_for("pago.pago"))
+    else:
+        return render_template("pago.html")
 
 # ---------------------------
 @app.route("/<usr>")

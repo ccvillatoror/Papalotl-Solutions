@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for,json
+from flask import Blueprint, flash, g, redirect, render_template, request, session, url_for
 from datetime import datetime
 from alchemyClasses.Usuario import Usuario
 from models.model_usuario import obtener_usuario, registrar_usuario, actualizar_direccion_envio
@@ -71,12 +71,15 @@ def direccion_envio():
 pago_blueprint = Blueprint('pago', __name__, url_prefix="/pago")
 @pago_blueprint.route('/', methods=['GET', 'POST'])
 def pago():
-    if request.method == 'POST':
-        print('POST gege')
-        flash("Pago exitoso.")
-        flash("La compra ha sido registrada.")
-        # TODO: Crear la transacción
-        return render_template('casa.html')
+    if 'compra' in session:
+        if request.method == 'POST':
+            print('POST gege')
+            flash("Pago exitoso.")
+            flash("La compra ha sido registrada.")
+            # TODO: Crear la transacción
+            return redirect(url_for('home'))
+        else:
+            print('GET jeje')
+            return render_template('pago.html')
     else:
-        print('GET jeje')
-        return render_template('casa.html')
+        flash("No hay ningún artículo seleccionado")

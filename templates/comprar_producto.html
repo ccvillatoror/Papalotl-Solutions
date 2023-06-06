@@ -27,7 +27,7 @@
     .product-description {
       margin-top: 20px;
     }
-    .buy-button {
+    .form-group {
       text-align: center;
       margin-top: 20px;
     }
@@ -63,18 +63,19 @@
       <p>Enjoy the classic taste of our signature Michelada. Made with premium ingredients, this refreshing drink is perfect for any occasion.</p>
       <p>Price: $4.99</p>
     </div>
-    <div class="buy-button">
-      <label for="quantity" class="quantity-label">Quantity:</label>
-      <select id="quantity" name="quantity" class="quantity-select" onchange="updateTotal()">
+    <div class="form-group">
+      <label for="quantity" class="quantity-label">Cantidad:</label>
+      <select id="quantity" name="cantidad" class="quantity-select" onchange="updateTotal()">
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
+        <option value="4">4</option>
         <!-- Add more options as needed -->
       </select>
-      <button onclick="window.location.href='/direccion-envio'">Comprar</button>
+      <button>Comprar</button>
     </div>
     <div class="total-label">
-      Total: <span id="total">$4.99</span>
+      Total: <span id="total" name="total">$4.99</span>
     </div>
   </div>
 </body>
