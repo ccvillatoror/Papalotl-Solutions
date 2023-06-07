@@ -16,7 +16,7 @@ def crear_pedido(total, estatus):
 def info_basica(id_pedido):
     info_pedido = {}
     pedido = Pedido.query.filter(Pedido.id_pedido == id_pedido).first()
-    pedido_producto =Conforma.query.filter(
+    pedido_producto = Conforma.query.filter(
         Conforma.id_pedido == id_pedido).first()
     if pedido_producto is not None:
         id_producto = pedido_producto.id_producto
@@ -33,7 +33,8 @@ def info_basica(id_pedido):
         id_cliente = Ordena.query.filter(
             Ordena.id_pedido == id_pedido).first().id_usuario
         info_pedido["id_cliente"] = id_cliente
-    return info_pedido
+        return info_pedido
+    return None
 
 def atender(id_pedido):
     Pedido.query.filter(Pedido.id_pedido == id_pedido).update({'estatus': 0})

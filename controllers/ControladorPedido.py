@@ -12,7 +12,7 @@ def mostrar_pedidos():
     get_id = lambda x: x.id_pedido
     id_pedidos = list(map(get_id, pedidos))
     pedidos = list(map(info_basica, id_pedidos))
-    pedidos = [x for x in pedidos if x.keys() is not None]
+    pedidos = [x for x in pedidos if x is not None]
     return render_template('pedidos.html', pedidos=pedidos)
 
 @pedidos_blueprint.route('/pedido/<int:id_pedido>', methods=['GET'])
